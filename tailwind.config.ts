@@ -51,19 +51,20 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          dark: "hsl(var(--navy-dark))",
-          light: "hsl(var(--navy-light))",
+        "blue-deep": "hsl(var(--blue-deep))",
+        "blue-light": "hsl(var(--blue-light))",
+        "blue-pale": "hsl(var(--blue-pale))",
+        teal: {
+          DEFAULT: "hsl(var(--teal))",
+          light: "hsl(var(--teal-light))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
-          dark: "hsl(var(--gold-dark))",
         },
-        "green-brazil": {
-          DEFAULT: "hsl(var(--green-brazil))",
-          light: "hsl(var(--green-light))",
+        slate: {
+          DEFAULT: "hsl(var(--slate))",
+          light: "hsl(var(--slate-light))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -91,29 +92,23 @@ export default {
           to: { height: "0" },
         },
         "fade-in-up": {
-          from: { opacity: "0", transform: "translateY(30px)" },
+          from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "count-up": {
-          from: { opacity: "0", transform: "scale(0.5)" },
-          to: { opacity: "1", transform: "scale(1)" },
+        "slide-in": {
+          from: { opacity: "0", transform: "translateX(-20px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
-        "count-up": "count-up 0.5s ease-out forwards",
-      },
-      backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, hsl(213, 58%, 15%) 0%, hsl(213, 58%, 25%) 100%)',
-        'gold-gradient': 'linear-gradient(135deg, hsl(45, 76%, 45%) 0%, hsl(45, 80%, 55%) 100%)',
-        'navy-gradient': 'linear-gradient(180deg, hsl(213, 58%, 23%) 0%, hsl(213, 58%, 15%) 100%)',
+        "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+        "slide-in": "slide-in 0.4s ease-out forwards",
       },
       boxShadow: {
-        'gold': '0 4px 14px 0 hsl(45, 76%, 45%, 0.4)',
-        'gold-lg': '0 10px 25px -3px hsl(45, 76%, 45%, 0.3)',
-        'navy': '0 4px 14px 0 hsl(213, 58%, 23%, 0.3)',
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03)',
       },
     },
   },
