@@ -7,66 +7,65 @@
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
 @import '@fontsource/montserrat/800.css';
-@import '@fontsource/montserrat/900.css';
 
 @layer base {
   :root {
-    /* Patriotic Brazilian Theme */
+    /* Institutional Clean Theme - Canoinhas */
     --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --foreground: 215 28% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 215 28% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 215 28% 17%;
 
-    /* Navy Blue - Primary (Trust, Authority) */
-    --primary: 213 58% 23%;
+    /* Deep Blue - Primary (Institutional) */
+    --primary: 213 56% 24%;
     --primary-foreground: 0 0% 100%;
 
-    /* Green - Secondary (Brazil Flag) */
-    --secondary: 160 91% 17%;
+    /* Teal/Green - Secondary */
+    --secondary: 168 76% 36%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Light Gray */
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    /* Light backgrounds */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    /* Gold/Yellow - Accent (CTAs) */
-    --accent: 45 76% 45%;
-    --accent-foreground: 222 47% 11%;
+    /* Gold accent */
+    --accent: 43 74% 49%;
+    --accent-foreground: 215 28% 17%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 213 58% 23%;
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 213 56% 24%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Custom colors for patriotic theme */
-    --navy: 213 58% 23%;
-    --navy-dark: 213 58% 15%;
-    --navy-light: 213 45% 35%;
-    --green-brazil: 160 91% 17%;
-    --green-light: 160 70% 30%;
-    --gold: 45 76% 45%;
-    --gold-light: 45 80% 55%;
-    --gold-dark: 45 76% 35%;
+    /* Custom institutional colors */
+    --blue-deep: 213 56% 24%;
+    --blue-light: 213 45% 35%;
+    --blue-pale: 213 60% 95%;
+    --teal: 168 76% 36%;
+    --teal-light: 168 60% 45%;
+    --gold: 43 74% 49%;
+    --gold-light: 43 80% 60%;
+    --slate: 215 28% 17%;
+    --slate-light: 215 16% 47%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(213, 58%, 15%) 0%, hsl(213, 58%, 25%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(45, 76%, 45%) 0%, hsl(45, 80%, 55%) 100%);
-    --gradient-navy: linear-gradient(180deg, hsl(213, 58%, 23%) 0%, hsl(213, 58%, 15%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(213, 56%, 20%) 0%, hsl(213, 56%, 30%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(168, 76%, 36%) 0%, hsl(168, 60%, 45%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(210, 20%, 98%) 0%, hsl(0, 0%, 100%) 100%);
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(213, 58%, 15%, 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(213, 58%, 15%, 0.1), 0 2px 4px -2px hsl(213, 58%, 15%, 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(213, 58%, 15%, 0.1), 0 4px 6px -4px hsl(213, 58%, 15%, 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(213, 58%, 15%, 0.1), 0 8px 10px -6px hsl(213, 58%, 15%, 0.1);
-    --shadow-gold: 0 4px 14px 0 hsl(45, 76%, 45%, 0.4);
+    --shadow-sm: 0 1px 2px 0 hsl(215, 28%, 17%, 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(215, 28%, 17%, 0.08), 0 2px 4px -2px hsl(215, 28%, 17%, 0.04);
+    --shadow-lg: 0 10px 15px -3px hsl(215, 28%, 17%, 0.08), 0 4px 6px -4px hsl(215, 28%, 17%, 0.04);
+    --shadow-xl: 0 20px 25px -5px hsl(215, 28%, 17%, 0.1), 0 8px 10px -6px hsl(215, 28%, 17%, 0.05);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -79,33 +78,33 @@
   }
 
   .dark {
-    --background: 213 58% 8%;
-    --foreground: 0 0% 98%;
+    --background: 215 28% 10%;
+    --foreground: 210 20% 96%;
 
-    --card: 213 58% 12%;
-    --card-foreground: 0 0% 98%;
+    --card: 215 28% 14%;
+    --card-foreground: 210 20% 96%;
 
-    --popover: 213 58% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 215 28% 14%;
+    --popover-foreground: 210 20% 96%;
 
-    --primary: 45 76% 45%;
-    --primary-foreground: 213 58% 10%;
+    --primary: 168 76% 40%;
+    --primary-foreground: 215 28% 10%;
 
-    --secondary: 160 70% 25%;
+    --secondary: 213 45% 35%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 213 40% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 215 28% 18%;
+    --muted-foreground: 215 16% 60%;
 
-    --accent: 45 76% 50%;
-    --accent-foreground: 213 58% 10%;
+    --accent: 43 74% 55%;
+    --accent-foreground: 215 28% 10%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 213 40% 20%;
-    --input: 213 40% 20%;
-    --ring: 45 76% 45%;
+    --border: 215 28% 20%;
+    --input: 215 28% 20%;
+    --ring: 168 76% 40%;
   }
 }
 
@@ -120,18 +119,18 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    @apply font-bold tracking-tight;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    @apply font-bold tracking-tight text-foreground;
   }
 }
 
 @layer utilities {
-  .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+  .text-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--blue-light)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -141,20 +140,12 @@
     background: var(--gradient-hero);
   }
 
-  .bg-gradient-gold {
-    background: var(--gradient-gold);
+  .bg-gradient-teal {
+    background: var(--gradient-teal);
   }
 
-  .bg-gradient-navy {
-    background: var(--gradient-navy);
-  }
-
-  .shadow-gold {
-    box-shadow: var(--shadow-gold);
-  }
-
-  .animate-counter {
-    animation: counter-up 2s ease-out forwards;
+  .bg-gradient-soft {
+    background: var(--gradient-soft);
   }
 
   .hover-lift {
@@ -165,9 +156,17 @@
     @apply -translate-y-1;
     box-shadow: var(--shadow-lg);
   }
+
+  .card-shadow {
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-shadow-hover:hover {
+    box-shadow: var(--shadow-xl);
+  }
 }
 
-@keyframes counter-up {
+@keyframes fade-in-up {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -178,21 +177,10 @@
   }
 }
 
-@keyframes fade-in-up {
+@keyframes slide-in-right {
   from {
     opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -200,23 +188,43 @@
   }
 }
 
-@keyframes pulse-gold {
-  0%, 100% {
-    box-shadow: 0 0 0 0 hsl(45, 76%, 45%, 0.4);
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  50% {
-    box-shadow: 0 0 0 15px hsl(45, 76%, 45%, 0);
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
+  animation: fade-in-up 0.5s ease-out forwards;
 }
 
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out forwards;
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
 }
 
-.animate-pulse-gold {
-  animation: pulse-gold 2s infinite;
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
 }

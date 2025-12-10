@@ -1,25 +1,23 @@
-import TopBar from "@/components/TopBar";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import LeadCaptureForm from "@/components/LeadCaptureForm";
-import StatsSection from "@/components/StatsSection";
-import AboutSection from "@/components/AboutSection";
-import DashboardSection from "@/components/DashboardSection";
-import NewsSection from "@/components/NewsSection";
-import Footer from "@/components/Footer";
+import Header from "@/components/prefeitura/Header";
+import HeroSection from "@/components/prefeitura/HeroSection";
+import AboutSection from "@/components/prefeitura/AboutSection";
+import WorkSection from "@/components/prefeitura/WorkSection";
+import NewsSection from "@/components/prefeitura/NewsSection";
+import SocialWall from "@/components/prefeitura/SocialWall";
+import ContactSection from "@/components/prefeitura/ContactSection";
+import Footer from "@/components/prefeitura/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <TopBar />
       <Header />
       <main>
         <HeroSection />
-        <LeadCaptureForm />
-        <StatsSection />
         <AboutSection />
-        <DashboardSection />
+        <WorkSection />
         <NewsSection />
+        <SocialWall />
+        <ContactSection />
       </main>
       <Footer />
     </div>
