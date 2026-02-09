@@ -82,8 +82,30 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-muted rounded-2xl h-64 flex items-center justify-center border border-border">
-              <div className="text-center"><MapPin className="w-10 h-10 text-primary/30 mx-auto mb-2" /><p className="text-muted-foreground text-sm">Mapa interativo</p></div>
+            <div className="bg-muted rounded-2xl h-64 overflow-hidden border border-border">
+              {contact?.map_embed_url ? (
+                <iframe
+                  src={contact.map_embed_url}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mapa da Prefeitura"
+                />
+              ) : (
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14262.927040811847!2d-50.39629!3d-26.17726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94de90e0a7b7e3ed%3A0x3a530df4b5c8b5e1!2sPrefeitura%20Municipal%20de%20Canoinhas!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mapa da Prefeitura"
+                />
+              )}
             </div>
           </motion.div>
         </div>
