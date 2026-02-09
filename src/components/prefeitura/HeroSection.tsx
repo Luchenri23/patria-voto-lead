@@ -42,7 +42,7 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
+              <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-semibold">
                 <Calendar className="mr-2 h-4 w-4" />
                 {hero?.cta2_text || "Agenda da Prefeita"}
               </Button>
