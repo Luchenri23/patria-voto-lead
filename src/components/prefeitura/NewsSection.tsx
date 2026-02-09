@@ -77,7 +77,7 @@ const NewsSection = () => {
                   </motion.a>
                 ))}
               </div>
-              <Button variant="outline" className="w-full mt-6 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">Ver todos os artigos</Button>
+              <Button variant="outline" className="w-full mt-6 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">Ver todos os artigos</Button>
             </div>
           </motion.div>
         </div>
