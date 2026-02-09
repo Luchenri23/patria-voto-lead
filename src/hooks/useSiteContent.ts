@@ -117,6 +117,34 @@ export interface SiteSocial {
   created_at: string;
 }
 
+export interface SiteSection {
+  id: string;
+  section_key: string;
+  label: string;
+  visible: boolean;
+  sort_order: number;
+}
+
+export interface SiteFooterLink {
+  id: string;
+  label: string;
+  url: string;
+  visible: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface SiteSocialLink {
+  id: string;
+  platform: string;
+  label: string;
+  url: string;
+  icon_url: string | null;
+  visible: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface SiteContact {
   id: string;
   address: string;
@@ -161,6 +189,9 @@ export const useSiteProjects = () => useMultiRow<SiteProject>("site_projects", "
 export const useSiteNews = () => useMultiRow<SiteNews>("site_news", "published_at", false);
 export const useSiteArticles = () => useMultiRow<SiteArticle>("site_articles", "published_at", false);
 export const useSiteSocial = () => useMultiRow<SiteSocial>("site_social", "sort_order", true);
+export const useSiteSections = () => useMultiRow<SiteSection>("site_sections", "sort_order", true);
+export const useSiteFooterLinks = () => useMultiRow<SiteFooterLink>("site_footer_links", "sort_order", true);
+export const useSiteSocialLinks = () => useMultiRow<SiteSocialLink>("site_social_links", "sort_order", true);
 
 // Mutation helpers
 export function useUpsertSingle(table: string) {

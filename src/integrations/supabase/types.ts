@@ -140,6 +140,33 @@ export type Database = {
         }
         Relationships: []
       }
+      site_footer_links: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          sort_order: number
+          url: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label: string
+          sort_order?: number
+          url?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          sort_order?: number
+          url?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       site_header: {
         Row: {
           cta_link: string
@@ -323,6 +350,30 @@ export type Database = {
         }
         Relationships: []
       }
+      site_sections: {
+        Row: {
+          id: string
+          label: string
+          section_key: string
+          sort_order: number
+          visible: boolean
+        }
+        Insert: {
+          id?: string
+          label: string
+          section_key: string
+          sort_order?: number
+          visible?: boolean
+        }
+        Update: {
+          id?: string
+          label?: string
+          section_key?: string
+          sort_order?: number
+          visible?: boolean
+        }
+        Relationships: []
+      }
       site_social: {
         Row: {
           caption: string | null
@@ -353,6 +404,39 @@ export type Database = {
           post_type?: string
           post_url?: string
           sort_order?: number
+        }
+        Relationships: []
+      }
+      site_social_links: {
+        Row: {
+          created_at: string
+          icon_url: string | null
+          id: string
+          label: string
+          platform: string
+          sort_order: number
+          url: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          icon_url?: string | null
+          id?: string
+          label: string
+          platform: string
+          sort_order?: number
+          url?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          icon_url?: string | null
+          id?: string
+          label?: string
+          platform?: string
+          sort_order?: number
+          url?: string
+          visible?: boolean
         }
         Relationships: []
       }
