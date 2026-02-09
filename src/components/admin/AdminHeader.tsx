@@ -2,7 +2,8 @@ import { useSiteHeader, useUpsertSingle } from "@/hooks/useSiteContent";
 import AdminSingleForm from "./AdminSingleForm";
 
 const fields = [
-  { name: "logo_text", label: "Nome/Logo", placeholder: "Juliana Maciel" },
+  { name: "logo_url", label: "Logo (imagem)", type: "image" as const, accept: "image/*" },
+  { name: "logo_text", label: "Nome/Logo (texto)", placeholder: "Juliana Maciel" },
   { name: "logo_subtitle", label: "Subtítulo", placeholder: "Prefeita de Canoinhas" },
   { name: "cta_text", label: "Texto do Botão", placeholder: "Fale Conosco" },
   { name: "cta_link", label: "Link do Botão", placeholder: "#contato" },

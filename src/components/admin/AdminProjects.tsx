@@ -5,8 +5,8 @@ const fields = [
   { name: "title", label: "Título", placeholder: "Nome do projeto" },
   { name: "description", label: "Descrição", type: "textarea" as const },
   { name: "category", label: "Categoria", type: "select" as const, options: ["Saúde", "Educação", "Infraestrutura", "Social"] },
-  { name: "image_url", label: "URL da Imagem", type: "url" as const },
-  { name: "video_url", label: "URL do Vídeo", type: "url" as const },
+  { name: "image_url", label: "Imagem", type: "image" as const, accept: "image/*" },
+  { name: "video_url", label: "Vídeo", type: "image" as const, accept: "video/*" },
   { name: "status", label: "Status", type: "select" as const, options: ["Em andamento", "Concluído", "Planejado"] },
   { name: "sort_order", label: "Ordem", placeholder: "0" },
 ];

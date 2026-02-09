@@ -3,7 +3,7 @@ import AdminSingleForm from "./AdminSingleForm";
 
 const fields = [
   { name: "biography", label: "Biografia", type: "textarea" as const, placeholder: "Texto biográfico" },
-  { name: "video_url", label: "URL do Vídeo", type: "url" as const, placeholder: "https://youtube.com/..." },
+  { name: "video_url", label: "Vídeo", type: "image" as const, accept: "video/*" },
   { name: "stat_1_value", label: "Estatística 1 - Valor", placeholder: "32" },
   { name: "stat_1_label", label: "Estatística 1 - Rótulo", placeholder: "Anos" },
   { name: "stat_2_value", label: "Estatística 2 - Valor", placeholder: "2º" },

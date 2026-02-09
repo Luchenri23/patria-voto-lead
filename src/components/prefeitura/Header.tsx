@@ -39,13 +39,19 @@ const Header = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 backdrop-blur-md shadow-soft py-3" : "bg-transparent py-4"}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="flex flex-col">
-            <span className={`text-lg md:text-xl font-bold transition-colors ${isScrolled ? "text-primary" : "text-primary-foreground"}`}>
-              {header?.logo_text || "Juliana Maciel"}
-            </span>
-            <span className={`text-xs font-medium tracking-wider transition-colors ${isScrolled ? "text-secondary" : "text-secondary"}`}>
-              {header?.logo_subtitle?.toUpperCase() || "PREFEITA DE CANOINHAS"}
-            </span>
+          <a href="#" className="flex items-center gap-2">
+            {header?.logo_url ? (
+              <img src={header.logo_url} alt={header?.logo_text || "Logo"} className={`h-10 md:h-12 w-auto transition-all ${isScrolled ? "" : "brightness-0 invert"}`} />
+            ) : (
+              <div className="flex flex-col">
+                <span className={`text-lg md:text-xl font-bold transition-colors ${isScrolled ? "text-primary" : "text-primary-foreground"}`}>
+                  {header?.logo_text || "Juliana Maciel"}
+                </span>
+                <span className={`text-xs font-medium tracking-wider transition-colors ${isScrolled ? "text-secondary" : "text-secondary"}`}>
+                  {header?.logo_subtitle?.toUpperCase() || "PREFEITA DE CANOINHAS"}
+                </span>
+              </div>
+            )}
           </a>
 
           <nav className="hidden lg:flex items-center gap-6">

@@ -6,8 +6,8 @@ const fields = [
   { name: "excerpt", label: "Resumo", type: "textarea" as const },
   { name: "content", label: "Conteúdo Completo", type: "textarea" as const },
   { name: "category", label: "Categoria", type: "select" as const, options: ["Geral", "Saúde", "Educação", "Infraestrutura", "Meio Ambiente", "Social", "Cultura"] },
-  { name: "image_url", label: "URL da Imagem", type: "url" as const },
-  { name: "video_url", label: "URL do Vídeo", type: "url" as const },
+  { name: "image_url", label: "Imagem", type: "image" as const, accept: "image/*" },
+  { name: "video_url", label: "Vídeo", type: "image" as const, accept: "video/*" },
   { name: "is_featured", label: "Destaque", type: "checkbox" as const },
 ];
 

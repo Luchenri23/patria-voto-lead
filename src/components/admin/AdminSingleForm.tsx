@@ -5,12 +5,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Save } from "lucide-react";
+import ImageUploadField from "./ImageUploadField";
 
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "url";
+  type?: "text" | "textarea" | "url" | "image";
   placeholder?: string;
+  accept?: string;
 }
 
 interface AdminSingleFormProps {
@@ -54,21 +56,33 @@ const AdminSingleForm = ({ title, fields, data, isLoading, onSave }: AdminSingle
       <form onSubmit={handleSubmit} className="space-y-4">
         {fields.map(field => (
           <div key={field.name} className="space-y-2">
-            <Label>{field.label}</Label>
-            {field.type === "textarea" ? (
-              <Textarea
+            {field.type === "image" ? (
+              <ImageUploadField
+                label={field.label}
                 value={formData[field.name] || ""}
-                onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                placeholder={field.placeholder}
-                rows={4}
+                onChange={(url) => setFormData(prev => ({ ...prev, [field.name]: url }))}
+                accept={field.accept}
               />
+            ) : field.type === "textarea" ? (
+              <>
+                <Label>{field.label}</Label>
+                <Textarea
+                  value={formData[field.name] || ""}
+                  onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                  placeholder={field.placeholder}
+                  rows={4}
+                />
+              </>
             ) : (
-              <Input
-                type={field.type === "url" ? "url" : "text"}
-                value={formData[field.name] || ""}
-                onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                placeholder={field.placeholder}
-              />
+              <>
+                <Label>{field.label}</Label>
+                <Input
+                  type={field.type === "url" ? "url" : "text"}
+                  value={formData[field.name] || ""}
+                  onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                  placeholder={field.placeholder}
+                />
+              </>
             )}
           </div>
         ))}
