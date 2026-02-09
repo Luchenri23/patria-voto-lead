@@ -14,16 +14,349 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      site_about: {
+        Row: {
+          biography: string
+          id: string
+          stat_1_label: string
+          stat_1_value: string
+          stat_2_label: string
+          stat_2_value: string
+          stat_3_label: string
+          stat_3_value: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          biography?: string
+          id?: string
+          stat_1_label?: string
+          stat_1_value?: string
+          stat_2_label?: string
+          stat_2_value?: string
+          stat_3_label?: string
+          stat_3_value?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          biography?: string
+          id?: string
+          stat_1_label?: string
+          stat_1_value?: string
+          stat_2_label?: string
+          stat_2_value?: string
+          stat_3_label?: string
+          stat_3_value?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      site_articles: {
+        Row: {
+          author: string
+          content: string | null
+          created_at: string
+          id: string
+          published_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string
+          content?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          content?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_contact: {
+        Row: {
+          address: string
+          email: string
+          id: string
+          map_embed_url: string | null
+          phone: string
+          updated_at: string
+          working_hours: string
+        }
+        Insert: {
+          address?: string
+          email?: string
+          id?: string
+          map_embed_url?: string | null
+          phone?: string
+          updated_at?: string
+          working_hours?: string
+        }
+        Update: {
+          address?: string
+          email?: string
+          id?: string
+          map_embed_url?: string | null
+          phone?: string
+          updated_at?: string
+          working_hours?: string
+        }
+        Relationships: []
+      }
+      site_footer: {
+        Row: {
+          copyright_text: string
+          id: string
+          privacy_url: string | null
+          slogan: string
+          transparency_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          copyright_text?: string
+          id?: string
+          privacy_url?: string | null
+          slogan?: string
+          transparency_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          copyright_text?: string
+          id?: string
+          privacy_url?: string | null
+          slogan?: string
+          transparency_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_header: {
+        Row: {
+          cta_link: string
+          cta_text: string
+          facebook_url: string | null
+          id: string
+          instagram_url: string | null
+          logo_subtitle: string
+          logo_text: string
+          tiktok_url: string | null
+          twitter_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          cta_link?: string
+          cta_text?: string
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          logo_subtitle?: string
+          logo_text?: string
+          tiktok_url?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cta_link?: string
+          cta_text?: string
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          logo_subtitle?: string
+          logo_text?: string
+          tiktok_url?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_hero: {
+        Row: {
+          cta_link: string
+          cta_text: string
+          id: string
+          image_url: string | null
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cta_link?: string
+          cta_text?: string
+          id?: string
+          image_url?: string | null
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          cta_link?: string
+          cta_text?: string
+          id?: string
+          image_url?: string | null
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_news: {
+        Row: {
+          category: string
+          content: string | null
+          created_at: string
+          excerpt: string
+          id: string
+          image_url: string | null
+          is_featured: boolean
+          published_at: string
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          category?: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          published_at?: string
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          category?: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          published_at?: string
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      site_projects: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      site_social: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          platform: string
+          post_type: string
+          post_url: string
+          sort_order: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          platform?: string
+          post_type?: string
+          post_url?: string
+          sort_order?: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          platform?: string
+          post_type?: string
+          post_url?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +483,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
