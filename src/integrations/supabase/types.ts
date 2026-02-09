@@ -184,8 +184,18 @@ export type Database = {
       }
       site_hero: {
         Row: {
+          badge_left: string
+          badge_right: string
+          badge_text: string
+          card_name: string
+          card_stat1_label: string
+          card_stat1_value: string
+          card_stat2_label: string
+          card_stat2_value: string
+          card_subtitle: string
           cta_link: string
           cta_text: string
+          cta2_text: string
           id: string
           image_url: string | null
           subtitle: string
@@ -193,8 +203,18 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          badge_left?: string
+          badge_right?: string
+          badge_text?: string
+          card_name?: string
+          card_stat1_label?: string
+          card_stat1_value?: string
+          card_stat2_label?: string
+          card_stat2_value?: string
+          card_subtitle?: string
           cta_link?: string
           cta_text?: string
+          cta2_text?: string
           id?: string
           image_url?: string | null
           subtitle?: string
@@ -202,8 +222,18 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          badge_left?: string
+          badge_right?: string
+          badge_text?: string
+          card_name?: string
+          card_stat1_label?: string
+          card_stat1_value?: string
+          card_stat2_label?: string
+          card_stat2_value?: string
+          card_subtitle?: string
           cta_link?: string
           cta_text?: string
+          cta2_text?: string
           id?: string
           image_url?: string | null
           subtitle?: string

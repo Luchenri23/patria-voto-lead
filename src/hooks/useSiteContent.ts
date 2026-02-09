@@ -43,6 +43,16 @@ export interface SiteHero {
   cta_text: string;
   cta_link: string;
   image_url: string | null;
+  badge_text: string;
+  card_name: string;
+  card_subtitle: string;
+  card_stat1_value: string;
+  card_stat1_label: string;
+  card_stat2_value: string;
+  card_stat2_label: string;
+  badge_right: string;
+  badge_left: string;
+  cta2_text: string;
   updated_at: string;
 }
 

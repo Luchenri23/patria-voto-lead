@@ -21,9 +21,9 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium border border-secondary/30">
+               <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium border border-secondary/30">
                 <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-                Gestão 2025-2028 • Canoinhas/SC
+                {hero?.badge_text || "Gestão 2025-2028 • Canoinhas/SC"}
               </span>
             </motion.div>
 
@@ -44,7 +44,7 @@ const HeroSection = () => {
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
                 <Calendar className="mr-2 h-4 w-4" />
-                Agenda da Prefeita
+                {hero?.cta2_text || "Agenda da Prefeita"}
               </Button>
             </motion.div>
           </motion.div>
@@ -56,19 +56,19 @@ const HeroSection = () => {
                   <div className="w-40 h-40 mx-auto bg-gradient-to-br from-secondary/30 to-primary-foreground/20 rounded-full flex items-center justify-center mb-6 border-4 border-secondary/30">
                     <span className="text-6xl">👩‍💼</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-primary-foreground mb-2">Juliana Maciel</h3>
-                  <p className="text-secondary font-semibold mb-4">Prefeita de Canoinhas</p>
+                   <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero?.card_name || "Juliana Maciel"}</h3>
+                  <p className="text-secondary font-semibold mb-4">{hero?.card_subtitle || "Prefeita de Canoinhas"}</p>
                   <div className="grid grid-cols-2 gap-4 text-primary-foreground/80 text-sm">
-                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">2º</p><p>Mandato</p></div>
-                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">PL</p><p>Partido</p></div>
+                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">{hero?.card_stat1_value || "2º"}</p><p>{hero?.card_stat1_label || "Mandato"}</p></div>
+                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">{hero?.card_stat2_value || "PL"}</p><p>{hero?.card_stat2_label || "Partido"}</p></div>
                   </div>
                 </div>
               </div>
               <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.5 }} className="absolute -right-4 top-10 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
-                Presidente Amplanorte
+                {hero?.badge_right || "Presidente Amplanorte"}
               </motion.div>
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1, duration: 0.5 }} className="absolute -left-4 bottom-20 bg-accent text-accent-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
-                Reeleita em 2024
+                {hero?.badge_left || "Reeleita em 2024"}
               </motion.div>
             </div>
           </motion.div>
