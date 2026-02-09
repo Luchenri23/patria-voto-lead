@@ -130,6 +130,7 @@ export interface SiteHeader {
   id: string;
   logo_text: string;
   logo_subtitle: string;
+  logo_url: string | null;
   cta_text: string;
   cta_link: string;
   instagram_url: string | null;

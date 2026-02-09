@@ -11,13 +11,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import ImageUploadField from "./ImageUploadField";
 
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "url" | "select" | "checkbox";
+  type?: "text" | "textarea" | "url" | "select" | "checkbox" | "image";
   options?: string[];
   placeholder?: string;
+  accept?: string;
 }
 
 interface AdminListManagerProps {
@@ -119,38 +121,49 @@ const AdminListManager = ({ title, fields, data, isLoading, onAdd, onUpdate, onD
           <form onSubmit={handleSubmit} className="space-y-4">
             {fields.map(field => (
               <div key={field.name} className="space-y-2">
-                <Label>{field.label}</Label>
-                {field.type === "textarea" ? (
-                  <Textarea
+                {field.type === "image" ? (
+                  <ImageUploadField
+                    label={field.label}
                     value={String(formData[field.name] || "")}
-                    onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                    placeholder={field.placeholder}
-                    rows={3}
+                    onChange={(url) => setFormData(prev => ({ ...prev, [field.name]: url }))}
+                    accept={field.accept}
                   />
-                ) : field.type === "select" ? (
-                  <select
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    value={String(formData[field.name] || "")}
-                    onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                  >
-                    {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                  </select>
-                ) : field.type === "checkbox" ? (
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={Boolean(formData[field.name])}
-                      onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.checked }))}
-                    />
-                    <span className="text-sm">{field.label}</span>
-                  </label>
                 ) : (
-                  <Input
-                    type={field.type === "url" ? "url" : "text"}
-                    value={String(formData[field.name] || "")}
-                    onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                    placeholder={field.placeholder}
-                  />
+                  <>
+                    <Label>{field.label}</Label>
+                    {field.type === "textarea" ? (
+                      <Textarea
+                        value={String(formData[field.name] || "")}
+                        onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        placeholder={field.placeholder}
+                        rows={3}
+                      />
+                    ) : field.type === "select" ? (
+                      <select
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        value={String(formData[field.name] || "")}
+                        onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                      >
+                        {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                      </select>
+                    ) : field.type === "checkbox" ? (
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          checked={Boolean(formData[field.name])}
+                          onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.checked }))}
+                        />
+                        <span className="text-sm">{field.label}</span>
+                      </label>
+                    ) : (
+                      <Input
+                        type={field.type === "url" ? "url" : "text"}
+                        value={String(formData[field.name] || "")}
+                        onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        placeholder={field.placeholder}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             ))}

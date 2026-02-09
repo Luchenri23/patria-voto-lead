@@ -6,7 +6,7 @@ const fields = [
   { name: "subtitle", label: "Subtítulo", type: "textarea" as const, placeholder: "Texto de apoio" },
   { name: "cta_text", label: "Texto do Botão CTA", placeholder: "Ver Realizações" },
   { name: "cta_link", label: "Link do CTA", placeholder: "#trabalho" },
-  { name: "image_url", label: "URL da Imagem de Fundo", type: "url" as const },
+  { name: "image_url", label: "Imagem de Fundo", type: "image" as const, accept: "image/*" },
 ];
 
 const AdminHero = () => {
