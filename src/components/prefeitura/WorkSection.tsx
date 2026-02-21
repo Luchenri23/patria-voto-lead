@@ -55,9 +55,17 @@ const WorkSection = () => {
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-                  <Button variant="ghost" className="p-0 h-auto text-secondary hover:text-primary font-semibold group/btn">
-                    Ver detalhes <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </Button>
+                  {project.external_url ? (
+                    <a href={project.external_url} target="_blank" rel="noopener noreferrer">
+                      <Button variant="ghost" className="p-0 h-auto text-secondary hover:text-primary font-semibold group/btn">
+                        Ver detalhes <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      </Button>
+                    </a>
+                  ) : (
+                    <Button variant="ghost" className="p-0 h-auto text-secondary hover:text-primary font-semibold group/btn">
+                      Ver detalhes <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Button>
+                  )}
                 </div>
               </motion.article>
             ))}

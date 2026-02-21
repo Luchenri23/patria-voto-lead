@@ -9,6 +9,7 @@ const fields = [
   { name: "video_url", label: "Vídeo", type: "image" as const, accept: "video/*" },
   { name: "status", label: "Status", type: "select" as const, options: ["Em andamento", "Concluído", "Planejado"] },
   { name: "sort_order", label: "Ordem", placeholder: "0" },
+  { name: "external_url", label: "URL Externa", type: "url" as const, placeholder: "https://..." },
 ];
 
 const AdminProjects = () => {
