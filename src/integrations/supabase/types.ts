@@ -223,11 +223,13 @@ export type Database = {
           cta_link: string
           cta_text: string
           cta2_text: string
+          fallback_color: string | null
           id: string
           image_url: string | null
           subtitle: string
           title: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           badge_left?: string
@@ -242,11 +244,13 @@ export type Database = {
           cta_link?: string
           cta_text?: string
           cta2_text?: string
+          fallback_color?: string | null
           id?: string
           image_url?: string | null
           subtitle?: string
           title?: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           badge_left?: string
@@ -261,11 +265,13 @@ export type Database = {
           cta_link?: string
           cta_text?: string
           cta2_text?: string
+          fallback_color?: string | null
           id?: string
           image_url?: string | null
           subtitle?: string
           title?: string
           updated_at?: string
+          video_url?: string | null
         }
         Relationships: []
       }
