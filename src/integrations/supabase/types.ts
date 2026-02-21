@@ -58,6 +58,7 @@ export type Database = {
           author: string
           content: string | null
           created_at: string
+          external_url: string | null
           id: string
           published_at: string
           title: string
@@ -67,6 +68,7 @@ export type Database = {
           author?: string
           content?: string | null
           created_at?: string
+          external_url?: string | null
           id?: string
           published_at?: string
           title: string
@@ -76,6 +78,7 @@ export type Database = {
           author?: string
           content?: string | null
           created_at?: string
+          external_url?: string | null
           id?: string
           published_at?: string
           title?: string
@@ -287,6 +290,7 @@ export type Database = {
           content: string | null
           created_at: string
           excerpt: string
+          external_url: string | null
           id: string
           image_url: string | null
           is_featured: boolean
@@ -300,6 +304,7 @@ export type Database = {
           content?: string | null
           created_at?: string
           excerpt?: string
+          external_url?: string | null
           id?: string
           image_url?: string | null
           is_featured?: boolean
@@ -313,6 +318,7 @@ export type Database = {
           content?: string | null
           created_at?: string
           excerpt?: string
+          external_url?: string | null
           id?: string
           image_url?: string | null
           is_featured?: boolean
@@ -328,6 +334,7 @@ export type Database = {
           category: string
           created_at: string
           description: string
+          external_url: string | null
           id: string
           image_url: string | null
           sort_order: number
@@ -340,6 +347,7 @@ export type Database = {
           category?: string
           created_at?: string
           description?: string
+          external_url?: string | null
           id?: string
           image_url?: string | null
           sort_order?: number
@@ -352,6 +360,7 @@ export type Database = {
           category?: string
           created_at?: string
           description?: string
+          external_url?: string | null
           id?: string
           image_url?: string | null
           sort_order?: number

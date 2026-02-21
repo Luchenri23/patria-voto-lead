@@ -82,6 +82,7 @@ export interface SiteProject {
   status: string;
   sort_order: number;
   created_at: string;
+  external_url: string | null;
   updated_at: string;
 }
 
@@ -96,6 +97,7 @@ export interface SiteNews {
   is_featured: boolean;
   published_at: string;
   created_at: string;
+  external_url: string | null;
   updated_at: string;
 }
 
@@ -106,6 +108,7 @@ export interface SiteArticle {
   author: string;
   published_at: string;
   created_at: string;
+  external_url: string | null;
   updated_at: string;
 }
 
