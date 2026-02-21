@@ -8,11 +8,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useSiteContact } from "@/hooks/useSiteContent";
+import { supabase } from "@/integrations/supabase/client";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const db = supabase as any;
 
 const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: contact } = useSiteContact();
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,6 +26,28 @@ const ContactSection = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     toast({ title: "Mensagem enviada!", description: "Agradecemos seu contato. Retornaremos em breve." });
     setIsSubmitting(false);
+  };
+
+  const handleNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail.trim()) return;
+    setSubscribing(true);
+    try {
+      const { error } = await db.from("newsletter_subscribers").insert({ email: newsletterEmail.trim() });
+      if (error) {
+        if (error.code === "23505") {
+          toast({ title: "Já inscrito!", description: "Este e-mail já está cadastrado na newsletter." });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({ title: "Inscrito com sucesso!", description: "Você receberá nossas novidades por e-mail." });
+        setNewsletterEmail("");
+      }
+    } catch {
+      toast({ title: "Erro", description: "Não foi possível realizar a inscrição.", variant: "destructive" });
+    }
+    setSubscribing(false);
   };
 
   return (
@@ -53,10 +81,10 @@ const ContactSection = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-6 bg-primary rounded-xl p-6">
               <h3 className="text-lg font-bold text-primary-foreground mb-2">Receba Novidades</h3>
               <p className="text-primary-foreground/80 text-sm mb-4">Cadastre-se para receber as últimas notícias.</p>
-              <div className="flex gap-2">
-                <Input type="email" placeholder="Seu melhor e-mail" className="flex-1 h-10 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">Inscrever</Button>
-              </div>
+              <form onSubmit={handleNewsletter} className="flex gap-2">
+                <Input type="email" required value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} placeholder="Seu melhor e-mail" className="flex-1 h-10 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                <Button type="submit" disabled={subscribing} className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">{subscribing ? "..." : "Inscrever"}</Button>
+              </form>
             </motion.div>
           </motion.div>
 
