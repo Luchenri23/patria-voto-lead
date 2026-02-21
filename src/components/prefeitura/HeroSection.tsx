@@ -1,19 +1,82 @@
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Volume2, VolumeX } from "lucide-react";
 import { useSiteHero } from "@/hooks/useSiteContent";
 
 const HeroSection = () => {
   const { data: hero } = useSiteHero();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  const hasVideo = !!hero?.video_url && !videoError;
+  const hasImage = !!hero?.image_url;
+  const fallbackColor = hero?.fallback_color || "hsl(213, 56%, 24%)";
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero">
-        {hero?.image_url && (
-          <img src={hero.image_url} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+      {/* Background layers */}
+      <div className="absolute inset-0" style={{ backgroundColor: fallbackColor }}>
+        {/* Gradient overlay always present */}
+        <div className="absolute inset-0 bg-gradient-hero" />
+
+        {/* Image layer (always loads for poster/fallback) */}
+        {hasImage && (
+          <img
+            src={hero.image_url!}
+            alt=""
+            loading="eager"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+              hasVideo && videoLoaded ? "opacity-0" : "opacity-20"
+            }`}
+          />
         )}
+
+        {/* Video layer */}
+        {hero?.video_url && !videoError && (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={hero?.image_url || undefined}
+            onCanPlay={() => setVideoLoaded(true)}
+            onError={() => setVideoError(true)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-30" : "opacity-0"
+            }`}
+          >
+            <source src={hero.video_url} type="video/mp4" />
+          </video>
+        )}
+
+        {/* Pattern overlay */}
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E")` }} />
       </div>
+
+      {/* Audio toggle */}
+      {hasVideo && videoLoaded && (
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          onClick={() => setIsMuted(!isMuted)}
+          className="absolute bottom-20 right-6 z-20 p-3 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+          aria-label={isMuted ? "Ativar som" : "Desativar som"}
+        >
+          {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+        </motion.button>
+      )}
 
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-accent to-secondary" />
 

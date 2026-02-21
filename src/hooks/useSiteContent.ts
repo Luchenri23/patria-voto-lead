@@ -53,6 +53,8 @@ export interface SiteHero {
   badge_right: string;
   badge_left: string;
   cta2_text: string;
+  video_url: string | null;
+  fallback_color: string | null;
   updated_at: string;
 }
 
