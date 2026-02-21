@@ -11,6 +11,7 @@ const fields = [
   { name: "facebook_url", label: "Facebook URL", type: "url" as const },
   { name: "twitter_url", label: "Twitter URL", type: "url" as const },
   { name: "tiktok_url", label: "TikTok URL", type: "url" as const },
+  { name: "favicon_url", label: "Favicon (ícone da aba do navegador)", type: "image" as const, accept: "image/png,image/x-icon,image/svg+xml,image/ico" },
 ];
 
 const AdminHeader = () => {

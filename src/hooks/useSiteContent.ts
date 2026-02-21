@@ -55,6 +55,7 @@ export interface SiteHero {
   cta2_text: string;
   video_url: string | null;
   fallback_color: string | null;
+  card_image_url: string | null;
   updated_at: string;
 }
 
@@ -177,6 +178,7 @@ export interface SiteHeader {
   facebook_url: string | null;
   twitter_url: string | null;
   tiktok_url: string | null;
+  favicon_url: string | null;
   updated_at: string;
 }
 

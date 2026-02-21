@@ -172,6 +172,7 @@ export type Database = {
           cta_link: string
           cta_text: string
           facebook_url: string | null
+          favicon_url: string | null
           id: string
           instagram_url: string | null
           logo_subtitle: string
@@ -185,6 +186,7 @@ export type Database = {
           cta_link?: string
           cta_text?: string
           facebook_url?: string | null
+          favicon_url?: string | null
           id?: string
           instagram_url?: string | null
           logo_subtitle?: string
@@ -198,6 +200,7 @@ export type Database = {
           cta_link?: string
           cta_text?: string
           facebook_url?: string | null
+          favicon_url?: string | null
           id?: string
           instagram_url?: string | null
           logo_subtitle?: string
@@ -214,6 +217,7 @@ export type Database = {
           badge_left: string
           badge_right: string
           badge_text: string
+          card_image_url: string | null
           card_name: string
           card_stat1_label: string
           card_stat1_value: string
@@ -235,6 +239,7 @@ export type Database = {
           badge_left?: string
           badge_right?: string
           badge_text?: string
+          card_image_url?: string | null
           card_name?: string
           card_stat1_label?: string
           card_stat1_value?: string
@@ -256,6 +261,7 @@ export type Database = {
           badge_left?: string
           badge_right?: string
           badge_text?: string
+          card_image_url?: string | null
           card_name?: string
           card_stat1_label?: string
           card_stat1_value?: string

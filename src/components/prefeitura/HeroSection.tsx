@@ -116,8 +116,12 @@ const HeroSection = () => {
             <div className="relative">
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-8 border border-primary-foreground/20">
                 <div className="text-center">
-                  <div className="w-40 h-40 mx-auto bg-gradient-to-br from-secondary/30 to-primary-foreground/20 rounded-full flex items-center justify-center mb-6 border-4 border-secondary/30">
-                    <span className="text-6xl">👩‍💼</span>
+                  <div className="w-40 h-40 mx-auto bg-gradient-to-br from-secondary/30 to-primary-foreground/20 rounded-full flex items-center justify-center mb-6 border-4 border-secondary/30 overflow-hidden">
+                    {hero?.card_image_url ? (
+                      <img src={hero.card_image_url} alt={hero?.card_name || "Foto"} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-6xl">👩‍💼</span>
+                    )}
                   </div>
                    <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero?.card_name || "Juliana Maciel"}</h3>
                   <p className="text-secondary font-semibold mb-4">{hero?.card_subtitle || "Prefeita de Canoinhas"}</p>

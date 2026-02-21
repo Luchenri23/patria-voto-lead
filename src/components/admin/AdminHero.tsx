@@ -17,6 +17,7 @@ const fields = [
   { name: "card_stat2_label", label: "Card Stat 2 - Label", placeholder: "Partido" },
   { name: "badge_right", label: "Badge Direita do Card", placeholder: "Presidente Amplanorte" },
   { name: "badge_left", label: "Badge Esquerda do Card", placeholder: "Reeleita em 2024" },
+  { name: "card_image_url", label: "Foto do Card (substitui emoji)", type: "image" as const, accept: "image/*" },
   { name: "video_url", label: "Vídeo de Fundo (URL)", type: "url" as const, placeholder: "https://exemplo.com/video.mp4" },
   { name: "fallback_color", label: "Cor de Fundo (fallback)", placeholder: "#1a365d" },
 ];
