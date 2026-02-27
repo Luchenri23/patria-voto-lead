@@ -11,6 +11,7 @@ interface Subscriber {
   id: string;
   email: string;
   name: string | null;
+  whatsapp: string | null;
   subscribed_at: string;
 }
 
@@ -50,8 +51,8 @@ const AdminNewsletter = () => {
 
   const handleExport = () => {
     if (!subscribers?.length) return;
-    const csv = ["Email,Nome,Data de Inscrição"]
-      .concat(subscribers.map(s => `${s.email},${s.name || ""},${new Date(s.subscribed_at).toLocaleDateString("pt-BR")}`))
+    const csv = ["Email,WhatsApp,Nome,Data de Inscrição"]
+      .concat(subscribers.map(s => `${s.whatsapp ? '' : s.email},${s.whatsapp || ""},${s.name || ""},${new Date(s.subscribed_at).toLocaleDateString("pt-BR")}`))
       .join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
@@ -87,7 +88,9 @@ const AdminNewsletter = () => {
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <Mail className="w-4 h-4 text-muted-foreground flex-shrink-0" />
               <div>
-                <p className="font-semibold text-foreground truncate">{sub.email}</p>
+                <p className="font-semibold text-foreground truncate">
+                  {sub.whatsapp ? `WhatsApp: ${sub.whatsapp}` : sub.email}
+                </p>
                 <p className="text-sm text-muted-foreground">{new Date(sub.subscribed_at).toLocaleDateString("pt-BR")}</p>
               </div>
             </div>

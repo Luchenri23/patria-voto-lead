@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
+import NewsDetail from "./pages/NewsDetail";
+import ProjectDetail from "./pages/ProjectDetail";
 import { useSiteHeader } from "@/hooks/useSiteContent";
 
 const queryClient = new QueryClient();
@@ -39,6 +41,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/noticias/:id" element={<NewsDetail />} />
+          <Route path="/projetos/:id" element={<ProjectDetail />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />

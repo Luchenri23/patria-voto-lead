@@ -17,7 +17,7 @@ const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: contact } = useSiteContact();
-  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterContact, setNewsletterContact] = useState("");
   const [subscribing, setSubscribing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,21 +28,29 @@ const ContactSection = () => {
     setIsSubmitting(false);
   };
 
+  const isWhatsApp = (value: string) => /^\+?\d[\d\s()-]{7,}$/.test(value.trim());
+
   const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsletterEmail.trim()) return;
+    const val = newsletterContact.trim();
+    if (!val) return;
     setSubscribing(true);
     try {
-      const { error } = await db.from("newsletter_subscribers").insert({ email: newsletterEmail.trim() });
+      const isPhone = isWhatsApp(val);
+      const insertData = isPhone
+        ? { email: `whatsapp:${val}`, whatsapp: val }
+        : { email: val };
+
+      const { error } = await db.from("newsletter_subscribers").insert(insertData);
       if (error) {
         if (error.code === "23505") {
-          toast({ title: "Já inscrito!", description: "Este e-mail já está cadastrado na newsletter." });
+          toast({ title: "Já inscrito!", description: "Este contato já está cadastrado." });
         } else {
           throw error;
         }
       } else {
-        toast({ title: "Inscrito com sucesso!", description: "Você receberá nossas novidades por e-mail." });
-        setNewsletterEmail("");
+        toast({ title: "Inscrito com sucesso!", description: isPhone ? "Você receberá novidades pelo WhatsApp." : "Você receberá nossas novidades por e-mail." });
+        setNewsletterContact("");
       }
     } catch {
       toast({ title: "Erro", description: "Não foi possível realizar a inscrição.", variant: "destructive" });
@@ -80,9 +88,16 @@ const ContactSection = () => {
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-6 bg-primary rounded-xl p-6">
               <h3 className="text-lg font-bold text-primary-foreground mb-2">Receba Novidades</h3>
-              <p className="text-primary-foreground/80 text-sm mb-4">Cadastre-se para receber as últimas notícias.</p>
+              <p className="text-primary-foreground/80 text-sm mb-4">Cadastre seu e-mail ou WhatsApp para receber as últimas notícias.</p>
               <form onSubmit={handleNewsletter} className="flex gap-2">
-                <Input type="email" required value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} placeholder="Seu melhor e-mail" className="flex-1 h-10 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                <Input
+                  type="text"
+                  required
+                  value={newsletterContact}
+                  onChange={e => setNewsletterContact(e.target.value)}
+                  placeholder="E-mail ou WhatsApp"
+                  className="flex-1 h-10 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50"
+                />
                 <Button type="submit" disabled={subscribing} className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">{subscribing ? "..." : "Inscrever"}</Button>
               </form>
             </motion.div>
@@ -112,27 +127,9 @@ const ContactSection = () => {
             </div>
             <div className="bg-muted rounded-2xl h-64 overflow-hidden border border-border">
               {contact?.map_embed_url ? (
-                <iframe
-                  src={contact.map_embed_url}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mapa da Prefeitura"
-                />
+                <iframe src={contact.map_embed_url} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Mapa da Prefeitura" />
               ) : (
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14262.927040811847!2d-50.39629!3d-26.17726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94de90e0a7b7e3ed%3A0x3a530df4b5c8b5e1!2sPrefeitura%20Municipal%20de%20Canoinhas!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mapa da Prefeitura"
-                />
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14262.927040811847!2d-50.39629!3d-26.17726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94de90e0a7b7e3ed%3A0x3a530df4b5c8b5e1!2sPrefeitura%20Municipal%20de%20Canoinhas!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Mapa da Prefeitura" />
               )}
             </div>
           </motion.div>
