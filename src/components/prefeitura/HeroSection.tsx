@@ -15,6 +15,13 @@ const HeroSection = () => {
   const hasImage = !!hero?.image_url;
   const fallbackColor = hero?.fallback_color || "hsl(213, 56%, 24%)";
 
+  // Conditional rendering helpers
+  const hasStat1 = !!(hero?.card_stat1_value?.trim() && hero?.card_stat1_label?.trim());
+  const hasStat2 = !!(hero?.card_stat2_value?.trim() && hero?.card_stat2_label?.trim());
+  const hasStats = hasStat1 || hasStat2;
+  const hasBadgeRight = !!hero?.badge_right?.trim();
+  const hasBadgeLeft = !!hero?.badge_left?.trim();
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
@@ -25,10 +32,7 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0" style={{ backgroundColor: fallbackColor }}>
-        {/* Gradient overlay always present */}
         <div className="absolute inset-0 bg-gradient-hero" />
-
-        {/* Image layer (always loads for poster/fallback) */}
         {hasImage && (
           <img
             src={hero.image_url!}
@@ -39,8 +43,6 @@ const HeroSection = () => {
             }`}
           />
         )}
-
-        {/* Video layer */}
         {hero?.video_url && !videoError && (
           <video
             ref={videoRef}
@@ -59,12 +61,9 @@ const HeroSection = () => {
             <source src={hero.video_url} type="video/mp4" />
           </video>
         )}
-
-        {/* Pattern overlay */}
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E")` }} />
       </div>
 
-      {/* Audio toggle */}
       {hasVideo && videoLoaded && (
         <motion.button
           initial={{ opacity: 0 }}
@@ -105,10 +104,19 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-semibold">
-                <Calendar className="mr-2 h-4 w-4" />
-                {hero?.cta2_text || "Agenda da Prefeita"}
-              </Button>
+              {hero?.agenda_url ? (
+                <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-semibold" asChild>
+                  <a href={hero.agenda_url} target="_blank" rel="noopener noreferrer">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {hero?.cta2_text || "Agenda da Prefeita"}
+                  </a>
+                </Button>
+              ) : hero?.cta2_text?.trim() ? (
+                <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-semibold">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  {hero.cta2_text}
+                </Button>
+              ) : null}
             </motion.div>
           </motion.div>
 
@@ -125,18 +133,34 @@ const HeroSection = () => {
                   </div>
                    <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero?.card_name || "Juliana Maciel"}</h3>
                   <p className="text-secondary font-semibold mb-4">{hero?.card_subtitle || "Prefeita de Canoinhas"}</p>
-                  <div className="grid grid-cols-2 gap-4 text-primary-foreground/80 text-sm">
-                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">{hero?.card_stat1_value || "2º"}</p><p>{hero?.card_stat1_label || "Mandato"}</p></div>
-                    <div className="p-3 bg-primary-foreground/5 rounded-lg"><p className="font-bold text-secondary text-lg">{hero?.card_stat2_value || "PL"}</p><p>{hero?.card_stat2_label || "Partido"}</p></div>
-                  </div>
+                  {hasStats && (
+                    <div className={`grid gap-4 text-primary-foreground/80 text-sm ${hasStat1 && hasStat2 ? "grid-cols-2" : "grid-cols-1"}`}>
+                      {hasStat1 && (
+                        <div className="p-3 bg-primary-foreground/5 rounded-lg">
+                          <p className="font-bold text-secondary text-lg">{hero?.card_stat1_value}</p>
+                          <p>{hero?.card_stat1_label}</p>
+                        </div>
+                      )}
+                      {hasStat2 && (
+                        <div className="p-3 bg-primary-foreground/5 rounded-lg">
+                          <p className="font-bold text-secondary text-lg">{hero?.card_stat2_value}</p>
+                          <p>{hero?.card_stat2_label}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.5 }} className="absolute -right-4 top-10 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
-                {hero?.badge_right || "Presidente Amplanorte"}
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1, duration: 0.5 }} className="absolute -left-4 bottom-20 bg-accent text-accent-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
-                {hero?.badge_left || "Reeleita em 2024"}
-              </motion.div>
+              {hasBadgeRight && (
+                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.5 }} className="absolute -right-4 top-10 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
+                  {hero?.badge_right}
+                </motion.div>
+              )}
+              {hasBadgeLeft && (
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1, duration: 0.5 }} className="absolute -left-4 bottom-20 bg-accent text-accent-foreground px-4 py-2 rounded-lg shadow-lg font-semibold text-sm">
+                  {hero?.badge_left}
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </div>

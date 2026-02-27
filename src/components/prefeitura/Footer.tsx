@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail } from "lucide-react";
-import { useSiteFooter, useSiteContact, useSiteFooterLinks, useSiteSocialLinks } from "@/hooks/useSiteContent";
+import { useSiteFooter, useSiteContact, useSiteFooterLinks, useSiteSocialLinks, useSiteHeader } from "@/hooks/useSiteContent";
 import SocialIcon from "@/components/prefeitura/SocialIcon";
 
 const Footer = () => {
@@ -7,6 +7,7 @@ const Footer = () => {
   const { data: contact } = useSiteContact();
   const { data: footerLinks } = useSiteFooterLinks();
   const { data: socialLinks } = useSiteSocialLinks();
+  const { data: header } = useSiteHeader();
 
   const visibleLinks = footerLinks?.filter(l => l.visible) || [];
   const visibleSocial = socialLinks?.filter(l => l.visible) || [];
@@ -25,8 +26,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <div className="mb-6">
-              <h3 className="text-xl font-bold mb-1">Juliana Maciel</h3>
-              <p className="text-secondary text-sm font-semibold">Prefeita de Canoinhas</p>
+              {header?.logo_url ? (
+                <img src={header.logo_url} alt={header?.logo_text || "Logo"} className="h-12 w-auto mb-2" />
+              ) : (
+                <>
+                  <h3 className="text-xl font-bold mb-1">{header?.logo_text || "Juliana Maciel"}</h3>
+                  <p className="text-secondary text-sm font-semibold">{header?.logo_subtitle || "Prefeita de Canoinhas"}</p>
+                </>
+              )}
             </div>
             <p className="text-primary-foreground/70 mb-6 text-sm leading-relaxed">{footer?.slogan || "Trabalhando por uma Canoinhas melhor para todos."}</p>
             <div className="flex gap-3">

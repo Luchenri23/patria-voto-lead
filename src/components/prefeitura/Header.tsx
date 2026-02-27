@@ -33,7 +33,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
             {header?.logo_url ? (
-              <img src={header.logo_url} alt={header?.logo_text || "Logo"} className={`h-10 md:h-12 w-auto transition-all ${isScrolled ? "" : "brightness-0 invert"}`} />
+              <img src={header.logo_url} alt={header?.logo_text || "Logo"} className="h-10 md:h-12 w-auto transition-all" />
             ) : (
               <div className="flex flex-col">
                 <span className={`text-lg md:text-xl font-bold transition-colors ${isScrolled ? "text-primary" : "text-primary-foreground"}`}>

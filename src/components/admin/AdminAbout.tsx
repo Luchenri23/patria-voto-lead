@@ -2,7 +2,10 @@ import { useSiteAbout, useUpsertSingle } from "@/hooks/useSiteContent";
 import AdminSingleForm from "./AdminSingleForm";
 
 const fields = [
-  { name: "biography", label: "Biografia", type: "textarea" as const, placeholder: "Texto biográfico" },
+  { name: "biography", label: "Biografia (resumo)", type: "textarea" as const, placeholder: "Texto biográfico" },
+  { name: "full_bio", label: "Bio Completa (texto longo)", type: "textarea" as const, placeholder: "Texto completo da bio - aparece ao clicar 'Ler Bio Completa'" },
+  { name: "trajectory", label: "Trajetória (texto longo)", type: "textarea" as const, placeholder: "Texto da trajetória - aparece ao clicar 'Ver Trajetória'" },
+  { name: "image_url", label: "Foto da Seção", type: "image" as const, accept: "image/*" },
   { name: "video_url", label: "Vídeo", type: "image" as const, accept: "video/*" },
   { name: "stat_1_value", label: "Estatística 1 - Valor", placeholder: "32" },
   { name: "stat_1_label", label: "Estatística 1 - Rótulo", placeholder: "Anos" },

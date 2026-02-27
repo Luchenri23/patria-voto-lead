@@ -56,6 +56,7 @@ export interface SiteHero {
   video_url: string | null;
   fallback_color: string | null;
   card_image_url: string | null;
+  agenda_url: string | null;
   updated_at: string;
 }
 
@@ -63,6 +64,9 @@ export interface SiteAbout {
   id: string;
   biography: string;
   video_url: string | null;
+  image_url: string | null;
+  full_bio: string | null;
+  trajectory: string | null;
   stat_1_value: string;
   stat_1_label: string;
   stat_2_value: string;

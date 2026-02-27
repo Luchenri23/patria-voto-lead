@@ -20,55 +20,67 @@ export type Database = {
           id: string
           name: string | null
           subscribed_at: string
+          whatsapp: string | null
         }
         Insert: {
           email: string
           id?: string
           name?: string | null
           subscribed_at?: string
+          whatsapp?: string | null
         }
         Update: {
           email?: string
           id?: string
           name?: string | null
           subscribed_at?: string
+          whatsapp?: string | null
         }
         Relationships: []
       }
       site_about: {
         Row: {
           biography: string
+          full_bio: string | null
           id: string
+          image_url: string | null
           stat_1_label: string
           stat_1_value: string
           stat_2_label: string
           stat_2_value: string
           stat_3_label: string
           stat_3_value: string
+          trajectory: string | null
           updated_at: string
           video_url: string | null
         }
         Insert: {
           biography?: string
+          full_bio?: string | null
           id?: string
+          image_url?: string | null
           stat_1_label?: string
           stat_1_value?: string
           stat_2_label?: string
           stat_2_value?: string
           stat_3_label?: string
           stat_3_value?: string
+          trajectory?: string | null
           updated_at?: string
           video_url?: string | null
         }
         Update: {
           biography?: string
+          full_bio?: string | null
           id?: string
+          image_url?: string | null
           stat_1_label?: string
           stat_1_value?: string
           stat_2_label?: string
           stat_2_value?: string
           stat_3_label?: string
           stat_3_value?: string
+          trajectory?: string | null
           updated_at?: string
           video_url?: string | null
         }
@@ -238,6 +250,7 @@ export type Database = {
       }
       site_hero: {
         Row: {
+          agenda_url: string | null
           badge_left: string
           badge_right: string
           badge_text: string
@@ -260,6 +273,7 @@ export type Database = {
           video_url: string | null
         }
         Insert: {
+          agenda_url?: string | null
           badge_left?: string
           badge_right?: string
           badge_text?: string
@@ -282,6 +296,7 @@ export type Database = {
           video_url?: string | null
         }
         Update: {
+          agenda_url?: string | null
           badge_left?: string
           badge_right?: string
           badge_text?: string
