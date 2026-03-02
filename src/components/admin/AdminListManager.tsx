@@ -20,6 +20,8 @@ interface Field {
   options?: string[];
   placeholder?: string;
   accept?: string;
+  hint?: string;
+  maxSizeKB?: number;
 }
 
 interface AdminListManagerProps {
@@ -127,6 +129,8 @@ const AdminListManager = ({ title, fields, data, isLoading, onAdd, onUpdate, onD
                     value={String(formData[field.name] || "")}
                     onChange={(url) => setFormData(prev => ({ ...prev, [field.name]: url }))}
                     accept={field.accept}
+                    hint={field.hint}
+                    maxSizeKB={field.maxSizeKB}
                   />
                 ) : (
                   <>

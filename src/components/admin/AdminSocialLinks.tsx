@@ -5,7 +5,7 @@ const fields = [
   { name: "platform", label: "Plataforma", type: "select" as const, options: ["instagram", "facebook", "twitter", "tiktok", "youtube", "whatsapp", "linkedin", "outro"] },
   { name: "label", label: "Nome de exibição", placeholder: "Instagram" },
   { name: "url", label: "URL do perfil", type: "url" as const, placeholder: "https://instagram.com/..." },
-  { name: "icon_url", label: "Ícone personalizado (imagem)", type: "image" as const, accept: "image/*" },
+  { name: "icon_url", label: "Ícone personalizado (imagem)", type: "image" as const, accept: "image/*", hint: "64×64px (quadrado)", maxSizeKB: 256 },
   { name: "visible", label: "Visível no site", type: "checkbox" as const },
   { name: "sort_order", label: "Ordem", placeholder: "0" },
 ];

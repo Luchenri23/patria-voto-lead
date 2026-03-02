@@ -12,9 +12,11 @@ interface ImageUploadFieldProps {
   onChange: (url: string) => void;
   accept?: string;
   bucket?: string;
+  hint?: string;
+  maxSizeKB?: number;
 }
 
-const ImageUploadField = ({ label, value, onChange, accept = "image/*,video/*", bucket = "content-images" }: ImageUploadFieldProps) => {
+const ImageUploadField = ({ label, value, onChange, accept = "image/*,video/*", bucket = "content-images", hint, maxSizeKB = 2048 }: ImageUploadFieldProps) => {
   const [mode, setMode] = useState<"upload" | "url">(value && !value.startsWith("blob:") ? "url" : "upload");
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -24,6 +26,11 @@ const ImageUploadField = ({ label, value, onChange, accept = "image/*,video/*", 
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (file.size > maxSizeKB * 1024) {
+      toast({ title: "Arquivo muito grande", description: `O tamanho máximo é ${maxSizeKB >= 1024 ? `${(maxSizeKB / 1024).toFixed(0)}MB` : `${maxSizeKB}KB`}.`, variant: "destructive" });
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      return;
+    }
     setUploading(true);
     try {
       const ext = file.name.split(".").pop();
@@ -54,6 +61,9 @@ const ImageUploadField = ({ label, value, onChange, accept = "image/*,video/*", 
   return (
     <div className="space-y-2">
       <Label>{label}</Label>
+      {hint && (
+        <p className="text-xs text-muted-foreground">📐 {hint} • Máx: {maxSizeKB >= 1024 ? `${(maxSizeKB / 1024).toFixed(0)}MB` : `${maxSizeKB}KB`}</p>
+      )}
 
       {/* Toggle between upload and URL */}
       <div className="flex gap-1 mb-2">
