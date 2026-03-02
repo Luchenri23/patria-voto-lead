@@ -13,6 +13,8 @@ interface Field {
   type?: "text" | "textarea" | "url" | "image";
   placeholder?: string;
   accept?: string;
+  hint?: string;
+  maxSizeKB?: number;
 }
 
 interface AdminSingleFormProps {
@@ -62,6 +64,8 @@ const AdminSingleForm = ({ title, fields, data, isLoading, onSave }: AdminSingle
                 value={formData[field.name] || ""}
                 onChange={(url) => setFormData(prev => ({ ...prev, [field.name]: url }))}
                 accept={field.accept}
+                hint={field.hint}
+                maxSizeKB={field.maxSizeKB}
               />
             ) : field.type === "textarea" ? (
               <>

@@ -8,7 +8,7 @@ const fields = [
   { name: "cta_link", label: "Link do CTA", placeholder: "#trabalho" },
   { name: "cta2_text", label: "Texto do 2º Botão (Agenda)", placeholder: "Agenda da Prefeita" },
   { name: "agenda_url", label: "URL da Agenda da Prefeita", type: "url" as const, placeholder: "https://exemplo.com/agenda" },
-  { name: "image_url", label: "Imagem de Fundo", type: "image" as const, accept: "image/*" },
+  { name: "image_url", label: "Imagem de Fundo", type: "image" as const, accept: "image/*", hint: "1920×1080px (paisagem)", maxSizeKB: 2048 },
   { name: "badge_text", label: "Badge Superior (ex: Gestão 2025-2028)", placeholder: "Gestão 2025-2028 • Canoinhas/SC" },
   { name: "card_name", label: "Nome no Card", placeholder: "Juliana Maciel" },
   { name: "card_subtitle", label: "Subtítulo do Card", placeholder: "Prefeita de Canoinhas" },
@@ -18,7 +18,7 @@ const fields = [
   { name: "card_stat2_label", label: "Card Stat 2 - Label", placeholder: "Partido" },
   { name: "badge_right", label: "Badge Direita (vazio para ocultar)", placeholder: "Presidente Amplanorte" },
   { name: "badge_left", label: "Badge Esquerda (vazio para ocultar)", placeholder: "Reeleita em 2024" },
-  { name: "card_image_url", label: "Foto do Card (substitui emoji)", type: "image" as const, accept: "image/*" },
+  { name: "card_image_url", label: "Foto do Card (substitui emoji)", type: "image" as const, accept: "image/*", hint: "200×200px (quadrado)", maxSizeKB: 512 },
   { name: "video_url", label: "Vídeo de Fundo (URL)", type: "url" as const, placeholder: "https://exemplo.com/video.mp4" },
   { name: "fallback_color", label: "Cor de Fundo (fallback)", placeholder: "#1a365d" },
 ];
