@@ -10,23 +10,20 @@ const SocialWall = () => {
 
   const visibleSocial = socialLinks?.filter(l => l.visible) || [];
 
-  // Determine if we have mixed content (instagram + tiktok)
-  const hasTiktok = useMemo(() => posts?.some(p => p.platform === "tiktok"), [posts]);
-  const hasInstagram = useMemo(() => posts?.some(p => p.platform === "instagram"), [posts]);
-  const isMixed = hasTiktok && hasInstagram;
-
-  // Split posts for mixed layout: first 3 vertical (reels/tiktok), next 3 square
+  // Split posts by post_type: "video" = vertical, "image" = square
   const verticalPosts = useMemo(() => {
-    if (!isMixed || !posts) return [];
-    return posts.filter(p => p.platform === "tiktok" || p.post_type === "video").slice(0, 3);
-  }, [posts, isMixed]);
+    if (!posts) return [];
+    return posts.filter(p => p.post_type === "video");
+  }, [posts]);
 
   const squarePosts = useMemo(() => {
     if (!posts) return [];
-    if (!isMixed) return posts;
-    const verticalIds = new Set(verticalPosts.map(p => p.id));
-    return posts.filter(p => !verticalIds.has(p.id)).slice(0, 3);
-  }, [posts, isMixed, verticalPosts]);
+    return posts.filter(p => p.post_type !== "video");
+  }, [posts]);
+
+  const hasVertical = verticalPosts.length > 0;
+  const hasSquare = squarePosts.length > 0;
+  const isMixed = hasVertical && hasSquare;
 
   return (
     <section className="py-20 bg-muted">
@@ -34,7 +31,7 @@ const SocialWall = () => {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold tracking-wider mb-4">REDES SOCIAIS</span>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Acompanhe nas Redes</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">Siga a Prefeita Juliana Maciel nas redes sociais e fique por dentro de tudo que acontece em Canoinhas.</p>
+          <p className="text-muted-foreground max-w-xl mx-auto">Fique por dentro de tudo que acontece!</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="flex flex-wrap justify-center gap-6 mb-12">
@@ -51,26 +48,26 @@ const SocialWall = () => {
 
         {isMixed ? (
           <div className="space-y-4">
-            {/* Vertical row (reels/tiktok) */}
-            {verticalPosts.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {verticalPosts.map((post, index) => (
-                  <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-[9/16]" />
-                ))}
-              </div>
-            )}
-            {/* Square row */}
-            {squarePosts.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {squarePosts.map((post, index) => (
-                  <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-square" />
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {verticalPosts.slice(0, 3).map((post, index) => (
+                <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-[9/16]" />
+              ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {squarePosts.slice(0, 3).map((post, index) => (
+                <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-square" />
+              ))}
+            </div>
+          </div>
+        ) : hasVertical ? (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {verticalPosts.map((post, index) => (
+              <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-[9/16]" />
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {posts?.map((post, index) => (
+            {squarePosts.map((post, index) => (
               <SocialPost key={post.id} post={post} index={index} aspectClass="aspect-square" />
             ))}
           </div>

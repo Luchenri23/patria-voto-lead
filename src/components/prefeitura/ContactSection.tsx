@@ -6,12 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Send, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Send, Phone, Mail } from "lucide-react";
 import { useSiteContact } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const db = supabase as any;
+
+const WHATSAPP_REGEX = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -28,28 +30,27 @@ const ContactSection = () => {
     setIsSubmitting(false);
   };
 
-  const isWhatsApp = (value: string) => /^\+?\d[\d\s()-]{7,}$/.test(value.trim());
+  const validateWhatsApp = (value: string) => WHATSAPP_REGEX.test(value.replace(/\s/g, ""));
 
   const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
     const val = newsletterContact.trim();
     if (!val) return;
+    if (!validateWhatsApp(val)) {
+      toast({ title: "Número inválido", description: "Informe um número de WhatsApp válido com DDD. Ex: (47) 99999-9999", variant: "destructive" });
+      return;
+    }
     setSubscribing(true);
     try {
-      const isPhone = isWhatsApp(val);
-      const insertData = isPhone
-        ? { email: `whatsapp:${val}`, whatsapp: val }
-        : { email: val };
-
-      const { error } = await db.from("newsletter_subscribers").insert(insertData);
+      const { error } = await db.from("newsletter_subscribers").insert({ email: `whatsapp:${val}`, whatsapp: val });
       if (error) {
         if (error.code === "23505") {
-          toast({ title: "Já inscrito!", description: "Este contato já está cadastrado." });
+          toast({ title: "Já inscrito!", description: "Este número já está cadastrado." });
         } else {
           throw error;
         }
       } else {
-        toast({ title: "Inscrito com sucesso!", description: isPhone ? "Você receberá novidades pelo WhatsApp." : "Você receberá nossas novidades por e-mail." });
+        toast({ title: "Inscrito com sucesso!", description: "Você receberá novidades pelo WhatsApp." });
         setNewsletterContact("");
       }
     } catch {
@@ -73,11 +74,11 @@ const ContactSection = () => {
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2"><Label htmlFor="nome" className="font-semibold">Nome Completo *</Label><Input id="nome" placeholder="Seu nome" required className="h-12" /></div>
-                  <div className="space-y-2"><Label htmlFor="email" className="font-semibold">E-mail *</Label><Input id="email" type="email" placeholder="seu@email.com" required className="h-12" /></div>
+                  <div className="space-y-2"><Label htmlFor="whatsapp" className="font-semibold">WhatsApp *</Label><Input id="whatsapp" type="tel" placeholder="(47) 99999-9999" required className="h-12" /></div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="assunto" className="font-semibold">Assunto *</Label>
-                  <Select required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="sugestao">Sugestão</SelectItem><SelectItem value="reclamacao">Reclamação</SelectItem><SelectItem value="elogio">Elogio</SelectItem><SelectItem value="duvida">Dúvida</SelectItem><SelectItem value="audiencia">Solicitar Audiência</SelectItem><SelectItem value="outro">Outro</SelectItem></SelectContent></Select>
+                  <Select required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="sugestao">Sugestão</SelectItem><SelectItem value="reclamacao">Reclamação</SelectItem><SelectItem value="elogio">Elogio</SelectItem><SelectItem value="duvida">Dúvida</SelectItem><SelectItem value="outro">Outro</SelectItem></SelectContent></Select>
                 </div>
                 <div className="space-y-2"><Label htmlFor="mensagem" className="font-semibold">Mensagem *</Label><Textarea id="mensagem" placeholder="Escreva sua mensagem aqui..." required className="min-h-[150px] resize-none" /></div>
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 font-semibold">
@@ -88,14 +89,14 @@ const ContactSection = () => {
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-6 bg-primary rounded-xl p-6">
               <h3 className="text-lg font-bold text-primary-foreground mb-2">Receba Novidades</h3>
-              <p className="text-primary-foreground/80 text-sm mb-4">Cadastre seu e-mail ou WhatsApp para receber as últimas notícias.</p>
+              <p className="text-primary-foreground/80 text-sm mb-4">Cadastre seu WhatsApp para receber as últimas notícias.</p>
               <form onSubmit={handleNewsletter} className="flex gap-2">
                 <Input
-                  type="text"
+                  type="tel"
                   required
                   value={newsletterContact}
                   onChange={e => setNewsletterContact(e.target.value)}
-                  placeholder="E-mail ou WhatsApp"
+                  placeholder="(47) 99999-9999"
                   className="flex-1 h-10 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50"
                 />
                 <Button type="submit" disabled={subscribing} className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">{subscribing ? "..." : "Inscrever"}</Button>
@@ -108,20 +109,12 @@ const ContactSection = () => {
               <h3 className="text-xl font-bold text-foreground mb-6">Informações de Contato</h3>
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><MapPin className="w-5 h-5 text-primary" /></div>
-                  <div><h4 className="font-semibold text-foreground mb-1">Endereço</h4><p className="text-muted-foreground text-sm">{contact?.address || "Rua Felipe Schmidt, 10 - Centro, Canoinhas - SC"}</p></div>
-                </div>
-                <div className="flex gap-4">
                   <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0"><Phone className="w-5 h-5 text-secondary" /></div>
                   <div><h4 className="font-semibold text-foreground mb-1">Telefone</h4><p className="text-muted-foreground text-sm">{contact?.phone || "(47) 3621-7705"}</p></div>
                 </div>
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0"><Mail className="w-5 h-5 text-accent" /></div>
-                  <div><h4 className="font-semibold text-foreground mb-1">E-mail</h4><p className="text-muted-foreground text-sm">{contact?.email || "gabinete@canoinhas.sc.gov.br"}</p></div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><Clock className="w-5 h-5 text-primary" /></div>
-                  <div><h4 className="font-semibold text-foreground mb-1">Horário</h4><p className="text-muted-foreground text-sm">{contact?.working_hours || "Segunda a Sexta: 8h às 17h"}</p></div>
+                  <div><h4 className="font-semibold text-foreground mb-1">E-mail</h4><p className="text-muted-foreground text-sm">{contact?.email?.trim() || "contato@julianamaciel.com"}</p></div>
                 </div>
               </div>
             </div>

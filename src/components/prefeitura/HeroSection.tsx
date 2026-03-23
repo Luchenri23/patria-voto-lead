@@ -98,12 +98,14 @@ const HeroSection = () => {
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-6" asChild>
-                <a href={hero?.cta_link || "#trabalho"}>
-                  {hero?.cta_text || "Ver Realizações"}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
+              {hero?.cta_text?.trim() && (
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-6" asChild>
+                  <a href={hero?.cta_link || "#trabalho"}>
+                    {hero.cta_text}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              )}
               {hero?.agenda_url ? (
                 <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-semibold" asChild>
                   <a href={hero.agenda_url} target="_blank" rel="noopener noreferrer">
