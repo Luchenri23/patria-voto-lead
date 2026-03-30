@@ -115,7 +115,7 @@ const ContactSection = () => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="assunto" className="font-semibold">Assunto *</Label>
-                  <Select required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="sugestao">Sugestão</SelectItem><SelectItem value="reclamacao">Reclamação</SelectItem><SelectItem value="elogio">Elogio</SelectItem><SelectItem value="duvida">Dúvida</SelectItem><SelectItem value="outro">Outro</SelectItem></SelectContent></Select>
+                  <Select value={formAssunto} onValueChange={setFormAssunto} required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="Sugestão">Sugestão</SelectItem><SelectItem value="Reclamação">Reclamação</SelectItem><SelectItem value="Elogio">Elogio</SelectItem><SelectItem value="Dúvida">Dúvida</SelectItem><SelectItem value="Outro">Outro</SelectItem></SelectContent></Select>
                 </div>
                 <div className="space-y-2"><Label htmlFor="mensagem" className="font-semibold">Mensagem *</Label><Textarea id="mensagem" placeholder="Escreva sua mensagem aqui..." required className="min-h-[150px] resize-none" /></div>
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 font-semibold">
