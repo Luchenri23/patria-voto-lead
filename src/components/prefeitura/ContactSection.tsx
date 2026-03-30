@@ -42,12 +42,11 @@ const ContactSection = () => {
     try {
       const form = e.currentTarget;
       const nome = (form.elements.namedItem("nome") as HTMLInputElement).value.trim();
-      const assunto = (form.querySelector("[data-assunto]") as HTMLElement)?.dataset.assuntoValue || "Outro";
       const mensagem = (form.elements.namedItem("mensagem") as HTMLTextAreaElement).value.trim();
 
-      const whatsappNumber = formPhone.replace(/\D/g, "");
-      const text = `*Contato pelo site*%0ANome: ${encodeURIComponent(nome)}%0AWhatsApp: ${encodeURIComponent(formPhone)}%0AAssunto: ${encodeURIComponent(assunto)}%0AMensagem: ${encodeURIComponent(mensagem)}`;
-      window.open(`https://wa.me/55${whatsappNumber}?text=${text}`, "_blank");
+      const adminPhone = contact?.phone?.replace(/\D/g, "") || "4736217705";
+      const text = `*Contato pelo site*%0ANome: ${encodeURIComponent(nome)}%0AWhatsApp: ${encodeURIComponent(formPhone)}%0AAssunto: ${encodeURIComponent(formAssunto || "Outro")}%0AMensagem: ${encodeURIComponent(mensagem)}`;
+      window.open(`https://wa.me/55${adminPhone}?text=${text}`, "_blank");
 
       toast({ title: "Mensagem enviada!", description: "Você será redirecionado ao WhatsApp para finalizar o envio." });
       form.reset();
