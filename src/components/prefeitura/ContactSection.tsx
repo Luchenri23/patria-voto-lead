@@ -30,6 +30,7 @@ const ContactSection = () => {
   const [newsletterContact, setNewsletterContact] = useState("");
   const [subscribing, setSubscribing] = useState(false);
   const [formPhone, setFormPhone] = useState("");
+  const [formAssunto, setFormAssunto] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
