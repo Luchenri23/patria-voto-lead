@@ -6,7 +6,7 @@ const fields = [
   { name: "post_url", label: "URL do Post", type: "url" as const },
   { name: "image_url", label: "Imagem", type: "image" as const, accept: "image/*,video/*", hint: "1080×1080px (quadrado) ou 1080×1920px (vertical)", maxSizeKB: 2048 },
   { name: "caption", label: "Legenda", type: "textarea" as const },
-  { name: "post_type", label: "Tipo", type: "select" as const, options: ["image", "video"] },
+  { name: "post_type", label: "Formato de Exibição", type: "select" as const, options: ["image", "video"], optionLabels: { image: "Quadrado", video: "Vertical" } },
   { name: "sort_order", label: "Ordem", placeholder: "0" },
 ];
 

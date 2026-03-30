@@ -38,8 +38,22 @@ const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast({ title: "Mensagem enviada!", description: "Agradecemos seu contato. Retornaremos em breve." });
+    try {
+      const form = e.currentTarget;
+      const nome = (form.elements.namedItem("nome") as HTMLInputElement).value.trim();
+      const assunto = (form.querySelector("[data-assunto]") as HTMLElement)?.dataset.assuntoValue || "Outro";
+      const mensagem = (form.elements.namedItem("mensagem") as HTMLTextAreaElement).value.trim();
+
+      const whatsappNumber = formPhone.replace(/\D/g, "");
+      const text = `*Contato pelo site*%0ANome: ${encodeURIComponent(nome)}%0AWhatsApp: ${encodeURIComponent(formPhone)}%0AAssunto: ${encodeURIComponent(assunto)}%0AMensagem: ${encodeURIComponent(mensagem)}`;
+      window.open(`https://wa.me/55${whatsappNumber}?text=${text}`, "_blank");
+
+      toast({ title: "Mensagem enviada!", description: "Você será redirecionado ao WhatsApp para finalizar o envio." });
+      form.reset();
+      setFormPhone("");
+    } catch {
+      toast({ title: "Erro", description: "Não foi possível enviar a mensagem.", variant: "destructive" });
+    }
     setIsSubmitting(false);
   };
 
