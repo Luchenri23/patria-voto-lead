@@ -5,6 +5,7 @@ const fields = [
   { name: "title", label: "Título", placeholder: "Título do artigo" },
   { name: "content", label: "Conteúdo", type: "textarea" as const },
   { name: "author", label: "Autor", placeholder: "Juliana Maciel" },
+  { name: "published_at", label: "Data de Publicação", type: "date" as const },
   { name: "external_url", label: "URL Externa", type: "url" as const, placeholder: "https://..." },
 ];
 

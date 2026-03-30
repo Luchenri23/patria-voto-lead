@@ -16,8 +16,9 @@ import ImageUploadField from "./ImageUploadField";
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "url" | "select" | "checkbox" | "image";
+  type?: "text" | "textarea" | "url" | "select" | "checkbox" | "image" | "date";
   options?: string[];
+  optionLabels?: Record<string, string>;
   placeholder?: string;
   accept?: string;
   hint?: string;
@@ -148,8 +149,14 @@ const AdminListManager = ({ title, fields, data, isLoading, onAdd, onUpdate, onD
                         value={String(formData[field.name] || "")}
                         onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
                       >
-                        {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                        {field.options?.map(opt => <option key={opt} value={opt}>{field.optionLabels?.[opt] || opt}</option>)}
                       </select>
+                    ) : field.type === "date" ? (
+                      <Input
+                        type="date"
+                        value={String(formData[field.name] || "").slice(0, 10)}
+                        onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                      />
                     ) : field.type === "checkbox" ? (
                       <label className="flex items-center gap-2">
                         <input

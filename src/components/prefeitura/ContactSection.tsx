@@ -30,6 +30,7 @@ const ContactSection = () => {
   const [newsletterContact, setNewsletterContact] = useState("");
   const [subscribing, setSubscribing] = useState(false);
   const [formPhone, setFormPhone] = useState("");
+  const [formAssunto, setFormAssunto] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,8 +39,22 @@ const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast({ title: "Mensagem enviada!", description: "Agradecemos seu contato. Retornaremos em breve." });
+    try {
+      const form = e.currentTarget;
+      const nome = (form.elements.namedItem("nome") as HTMLInputElement).value.trim();
+      const mensagem = (form.elements.namedItem("mensagem") as HTMLTextAreaElement).value.trim();
+
+      const adminPhone = contact?.phone?.replace(/\D/g, "") || "4736217705";
+      const text = `*Contato pelo site*%0ANome: ${encodeURIComponent(nome)}%0AWhatsApp: ${encodeURIComponent(formPhone)}%0AAssunto: ${encodeURIComponent(formAssunto || "Outro")}%0AMensagem: ${encodeURIComponent(mensagem)}`;
+      window.open(`https://wa.me/55${adminPhone}?text=${text}`, "_blank");
+
+      toast({ title: "Mensagem enviada!", description: "Você será redirecionado ao WhatsApp para finalizar o envio." });
+      form.reset();
+      setFormPhone("");
+      setFormAssunto("");
+    } catch {
+      toast({ title: "Erro", description: "Não foi possível enviar a mensagem.", variant: "destructive" });
+    }
     setIsSubmitting(false);
   };
 
@@ -101,7 +116,7 @@ const ContactSection = () => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="assunto" className="font-semibold">Assunto *</Label>
-                  <Select required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="sugestao">Sugestão</SelectItem><SelectItem value="reclamacao">Reclamação</SelectItem><SelectItem value="elogio">Elogio</SelectItem><SelectItem value="duvida">Dúvida</SelectItem><SelectItem value="outro">Outro</SelectItem></SelectContent></Select>
+                  <Select value={formAssunto} onValueChange={setFormAssunto} required><SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione o assunto" /></SelectTrigger><SelectContent className="bg-background border border-border z-50"><SelectItem value="Sugestão">Sugestão</SelectItem><SelectItem value="Reclamação">Reclamação</SelectItem><SelectItem value="Elogio">Elogio</SelectItem><SelectItem value="Dúvida">Dúvida</SelectItem><SelectItem value="Outro">Outro</SelectItem></SelectContent></Select>
                 </div>
                 <div className="space-y-2"><Label htmlFor="mensagem" className="font-semibold">Mensagem *</Label><Textarea id="mensagem" placeholder="Escreva sua mensagem aqui..." required className="min-h-[150px] resize-none" /></div>
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 font-semibold">
