@@ -55,23 +55,23 @@ const AboutSection = () => {
             </div>
 
             {statsCount > 0 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="absolute -bottom-6 left-6 right-6 flex gap-4">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="absolute -bottom-6 left-4 right-4 sm:left-6 sm:right-6 flex flex-col sm:flex-row gap-3">
                 {stat1Filled && (
-                  <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                    <p className="text-2xl font-bold text-secondary">{about?.stat_1_value}</p>
-                    <p className="text-sm text-muted-foreground">{about?.stat_1_label}</p>
+                  <div className="flex-1 bg-card rounded-xl p-3 sm:p-4 shadow-lg border border-border">
+                    <p className="text-xl sm:text-2xl font-bold text-secondary">{about?.stat_1_value}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{about?.stat_1_label}</p>
                   </div>
                 )}
                 {stat2Filled && (
-                  <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                    <p className="text-2xl font-bold text-primary">{about?.stat_2_value}</p>
-                    <p className="text-sm text-muted-foreground">{about?.stat_2_label}</p>
+                  <div className="flex-1 bg-card rounded-xl p-3 sm:p-4 shadow-lg border border-border">
+                    <p className="text-xl sm:text-2xl font-bold text-primary">{about?.stat_2_value}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{about?.stat_2_label}</p>
                   </div>
                 )}
                 {stat3Filled && (
-                  <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                    <p className="text-2xl font-bold text-accent">{about?.stat_3_value}</p>
-                    <p className="text-sm text-muted-foreground">{about?.stat_3_label}</p>
+                  <div className="flex-1 bg-card rounded-xl p-3 sm:p-4 shadow-lg border border-border">
+                    <p className="text-xl sm:text-2xl font-bold text-accent">{about?.stat_3_value}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{about?.stat_3_label}</p>
                   </div>
                 )}
               </motion.div>

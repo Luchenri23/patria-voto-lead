@@ -22,7 +22,6 @@ const Header = () => {
     { label: "Quem Sou", href: "#quem-sou" },
     { label: "Meu Trabalho", href: "#trabalho" },
     { label: "Notícias", href: "#noticias" },
-    { label: "Artigos", href: "#artigos" },
     { label: "Projetos", href: "#projetos" },
     { label: "Contato", href: "#contato" },
   ];

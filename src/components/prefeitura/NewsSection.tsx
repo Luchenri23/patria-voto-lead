@@ -34,7 +34,7 @@ const NewsSection = () => {
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-semibold tracking-wider mb-4">FIQUE INFORMADO</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Notícias e Artigos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Notícias e Informações</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -94,7 +94,7 @@ const NewsSection = () => {
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="artigos">
             <div className="bg-primary rounded-2xl p-6 shadow-lg">
               <h3 className="text-lg font-bold text-primary-foreground mb-6 flex items-center gap-2">
-                <span className="w-1 h-6 bg-secondary rounded-full" /> Artigos da Prefeita
+                <span className="w-1 h-6 bg-secondary rounded-full" /> Notícias e Informações
               </h3>
               <div className="space-y-4">
                 {articles?.slice(0, 5).map((article, index) => {
@@ -113,7 +113,6 @@ const NewsSection = () => {
                   );
                 })}
               </div>
-              <Button variant="outline" className="w-full mt-6 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">Ver todos os artigos</Button>
             </div>
           </motion.div>
         </div>
