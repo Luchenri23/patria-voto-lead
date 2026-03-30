@@ -51,6 +51,7 @@ const ContactSection = () => {
       toast({ title: "Mensagem enviada!", description: "Você será redirecionado ao WhatsApp para finalizar o envio." });
       form.reset();
       setFormPhone("");
+      setFormAssunto("");
     } catch {
       toast({ title: "Erro", description: "Não foi possível enviar a mensagem.", variant: "destructive" });
     }
