@@ -64,7 +64,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3"><MapPin className="w-4 h-4 text-secondary flex-shrink-0 mt-1" /><span className="text-primary-foreground/70 text-sm">{contact?.address || "Rua Felipe Schmidt, 10 - Centro"}</span></li>
               <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-secondary flex-shrink-0" /><span className="text-primary-foreground/70 text-sm">{contact?.phone || "(47) 3621-7705"}</span></li>
-              <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-secondary flex-shrink-0" /><span className="text-primary-foreground/70 text-sm">{contact?.email || "gabinete@canoinhas.sc.gov.br"}</span></li>
+              <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-secondary flex-shrink-0" /><a href={`mailto:${contact?.email?.trim() || "contato@julianamaciel.com"}`} className="text-primary-foreground/70 text-sm hover:text-secondary transition-colors">{contact?.email?.trim() || "contato@julianamaciel.com"}</a></li>
             </ul>
           </div>
         </div>

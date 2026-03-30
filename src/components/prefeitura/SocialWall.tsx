@@ -10,7 +10,7 @@ const SocialWall = () => {
 
   const visibleSocial = socialLinks?.filter(l => l.visible) || [];
 
-  // Split posts by post_type: "video" = vertical, "image" = square
+  // Split posts by post_type: "video" = vertical (any platform), "image" = square
   const verticalPosts = useMemo(() => {
     if (!posts) return [];
     return posts.filter(p => p.post_type === "video");
