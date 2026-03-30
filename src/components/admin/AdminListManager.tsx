@@ -16,8 +16,9 @@ import ImageUploadField from "./ImageUploadField";
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "url" | "select" | "checkbox" | "image";
+  type?: "text" | "textarea" | "url" | "select" | "checkbox" | "image" | "date";
   options?: string[];
+  optionLabels?: Record<string, string>;
   placeholder?: string;
   accept?: string;
   hint?: string;
