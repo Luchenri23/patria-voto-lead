@@ -6,22 +6,25 @@ import { useSiteAbout } from "@/hooks/useSiteContent";
 
 interface StatCardProps {
   value: string;
-  label: string;
+  subtitle: string;
+  lines: string[];
   colorClass: string;
   sizeClass?: string;
 }
 
-const StatCard = ({ value, label, colorClass, sizeClass = "text-2xl" }: StatCardProps) => {
-  const parts = label.split(" - ");
-  const title = parts[0];
-  const description = parts.length > 1 ? parts.slice(1).join(" - ") : null;
+const StatCard = ({ value, subtitle, lines, colorClass, sizeClass = "text-2xl" }: StatCardProps) => {
+  const visibleLines = lines.filter(l => l.trim());
 
   return (
-    <div className="bg-card rounded-xl p-3 sm:p-4 shadow-md border border-border min-w-[140px] flex-shrink-0 snap-start">
-      <p className={`${sizeClass} font-bold ${colorClass}`}>{value}</p>
-      <p className="text-xs sm:text-sm font-medium text-foreground/80 leading-tight">{title}</p>
-      {description && (
-        <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight mt-1 line-clamp-3">{description}</p>
+    <div className="bg-card rounded-xl p-3 sm:p-4 shadow-md border border-border min-w-[150px] flex-shrink-0 snap-start">
+      <p className={`${sizeClass} font-bold ${colorClass} leading-tight`}>{value}</p>
+      {subtitle && <p className="text-xs sm:text-sm font-semibold text-foreground/90 leading-tight mt-0.5">{subtitle}</p>}
+      {visibleLines.length > 0 && (
+        <div className="mt-1.5 space-y-0.5">
+          {visibleLines.map((line, i) => (
+            <p key={i} className="text-[11px] sm:text-xs text-muted-foreground leading-tight">{line}</p>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -38,10 +41,30 @@ const AboutSection = () => {
   const hasFullBio = !!about?.full_bio?.trim();
   const hasTrajectory = !!about?.trajectory?.trim();
 
+  const a = about as Record<string, unknown> | undefined;
+
   const stats = [
-    { filled: !!(about?.stat_1_value?.trim() && about?.stat_1_label?.trim()), value: about?.stat_1_value || "", label: about?.stat_1_label || "", color: "text-secondary" },
-    { filled: !!(about?.stat_2_value?.trim() && about?.stat_2_label?.trim()), value: about?.stat_2_value || "", label: about?.stat_2_label || "", color: "text-primary" },
-    { filled: !!(about?.stat_3_value?.trim() && about?.stat_3_label?.trim()), value: about?.stat_3_value || "", label: about?.stat_3_label || "", color: "text-accent" },
+    {
+      filled: !!(about?.stat_1_value?.trim()),
+      value: about?.stat_1_value || "",
+      subtitle: (a?.stat_1_subtitle as string) || about?.stat_1_label || "",
+      lines: [(a?.stat_1_line1 as string) || "", (a?.stat_1_line2 as string) || "", (a?.stat_1_line3 as string) || ""],
+      color: "text-secondary",
+    },
+    {
+      filled: !!(about?.stat_2_value?.trim()),
+      value: about?.stat_2_value || "",
+      subtitle: (a?.stat_2_subtitle as string) || about?.stat_2_label || "",
+      lines: [(a?.stat_2_line1 as string) || "", (a?.stat_2_line2 as string) || "", (a?.stat_2_line3 as string) || ""],
+      color: "text-primary",
+    },
+    {
+      filled: !!(about?.stat_3_value?.trim()),
+      value: about?.stat_3_value || "",
+      subtitle: (a?.stat_3_subtitle as string) || about?.stat_3_label || "",
+      lines: [(a?.stat_3_line1 as string) || "", (a?.stat_3_line2 as string) || "", (a?.stat_3_line3 as string) || ""],
+      color: "text-accent",
+    },
   ].filter(s => s.filled);
 
   return (
@@ -83,13 +106,13 @@ const AboutSection = () => {
                 {/* Mobile: horizontal scroll */}
                 <div className="sm:hidden flex gap-2.5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none">
                   {stats.map((s, i) => (
-                    <StatCard key={i} value={s.value} label={s.label} colorClass={s.color} sizeClass="text-xl" />
+                    <StatCard key={i} value={s.value} subtitle={s.subtitle} lines={s.lines} colorClass={s.color} sizeClass="text-xl" />
                   ))}
                 </div>
                 {/* Desktop: grid */}
                 <div className="hidden sm:grid sm:grid-cols-3 gap-3">
                   {stats.map((s, i) => (
-                    <StatCard key={i} value={s.value} label={s.label} colorClass={s.color} />
+                    <StatCard key={i} value={s.value} subtitle={s.subtitle} lines={s.lines} colorClass={s.color} />
                   ))}
                 </div>
               </motion.div>
