@@ -39,20 +39,6 @@ function useMultiRow<T>(table: string, orderBy = "created_at", ascending = false
   });
 }
 
-// Generic fetch for multi-row tables
-function useMultiRow<T>(table: string, orderBy = "created_at", ascending = false) {
-  return useQuery({
-    queryKey: [table],
-    queryFn: async () => {
-      const { data, error } = await db
-        .from(table)
-        .select("*")
-        .order(orderBy, { ascending });
-      if (error) throw error;
-      return (data as T[]) || [];
-    },
-  });
-}
 
 // Types
 export interface SiteHero {
