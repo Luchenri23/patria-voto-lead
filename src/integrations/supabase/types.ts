@@ -45,10 +45,22 @@ export type Database = {
           id: string
           image_url: string | null
           stat_1_label: string
+          stat_1_line1: string
+          stat_1_line2: string
+          stat_1_line3: string
+          stat_1_subtitle: string
           stat_1_value: string
           stat_2_label: string
+          stat_2_line1: string
+          stat_2_line2: string
+          stat_2_line3: string
+          stat_2_subtitle: string
           stat_2_value: string
           stat_3_label: string
+          stat_3_line1: string
+          stat_3_line2: string
+          stat_3_line3: string
+          stat_3_subtitle: string
           stat_3_value: string
           trajectory: string | null
           updated_at: string
@@ -60,10 +72,22 @@ export type Database = {
           id?: string
           image_url?: string | null
           stat_1_label?: string
+          stat_1_line1?: string
+          stat_1_line2?: string
+          stat_1_line3?: string
+          stat_1_subtitle?: string
           stat_1_value?: string
           stat_2_label?: string
+          stat_2_line1?: string
+          stat_2_line2?: string
+          stat_2_line3?: string
+          stat_2_subtitle?: string
           stat_2_value?: string
           stat_3_label?: string
+          stat_3_line1?: string
+          stat_3_line2?: string
+          stat_3_line3?: string
+          stat_3_subtitle?: string
           stat_3_value?: string
           trajectory?: string | null
           updated_at?: string
@@ -75,10 +99,22 @@ export type Database = {
           id?: string
           image_url?: string | null
           stat_1_label?: string
+          stat_1_line1?: string
+          stat_1_line2?: string
+          stat_1_line3?: string
+          stat_1_subtitle?: string
           stat_1_value?: string
           stat_2_label?: string
+          stat_2_line1?: string
+          stat_2_line2?: string
+          stat_2_line3?: string
+          stat_2_subtitle?: string
           stat_2_value?: string
           stat_3_label?: string
+          stat_3_line1?: string
+          stat_3_line2?: string
+          stat_3_line3?: string
+          stat_3_subtitle?: string
           stat_3_value?: string
           trajectory?: string | null
           updated_at?: string
