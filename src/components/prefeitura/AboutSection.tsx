@@ -41,7 +41,7 @@ const AboutSection = () => {
   const hasFullBio = !!about?.full_bio?.trim();
   const hasTrajectory = !!about?.trajectory?.trim();
 
-  const a = about as Record<string, unknown> | undefined;
+  const a = about as unknown as Record<string, unknown> | undefined;
 
   const stats = [
     {
