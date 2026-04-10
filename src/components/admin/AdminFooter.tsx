@@ -2,7 +2,8 @@ import { useSiteFooter, useUpsertSingle } from "@/hooks/useSiteContent";
 import AdminSingleForm from "./AdminSingleForm";
 
 const fields = [
-  { name: "copyright_text", label: "Texto de Copyright" },
+  { name: "copyright_text", label: "Texto de Copyright", placeholder: "© 2026 Juliana Maciel - Todos os direitos reservados" },
+  { name: "gestao_text", label: "Texto de Gestão", placeholder: "Gestão 2025-2028 • Canoinhas/SC" },
   { name: "slogan", label: "Slogan", placeholder: "Trabalhando por uma Canoinhas melhor" },
   { name: "transparency_url", label: "URL Portal Transparência", type: "url" as const },
   { name: "privacy_url", label: "URL Política de Privacidade", type: "url" as const },

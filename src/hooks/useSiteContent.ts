@@ -17,6 +17,8 @@ function useSingleRow<T>(table: string) {
       if (error) throw error;
       return data as T | null;
     },
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 }
 
@@ -32,8 +34,11 @@ function useMultiRow<T>(table: string, orderBy = "created_at", ascending = false
       if (error) throw error;
       return (data as T[]) || [];
     },
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 }
+
 
 // Types
 export interface SiteHero {

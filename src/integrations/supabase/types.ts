@@ -152,6 +152,7 @@ export type Database = {
       site_footer: {
         Row: {
           copyright_text: string
+          gestao_text: string
           id: string
           privacy_url: string | null
           slogan: string
@@ -160,6 +161,7 @@ export type Database = {
         }
         Insert: {
           copyright_text?: string
+          gestao_text?: string
           id?: string
           privacy_url?: string | null
           slogan?: string
@@ -168,6 +170,7 @@ export type Database = {
         }
         Update: {
           copyright_text?: string
+          gestao_text?: string
           id?: string
           privacy_url?: string | null
           slogan?: string
