@@ -4,6 +4,29 @@ import { Button } from "@/components/ui/button";
 import { Play, BookOpen, X } from "lucide-react";
 import { useSiteAbout } from "@/hooks/useSiteContent";
 
+interface StatCardProps {
+  value: string;
+  label: string;
+  colorClass: string;
+  sizeClass?: string;
+}
+
+const StatCard = ({ value, label, colorClass, sizeClass = "text-2xl" }: StatCardProps) => {
+  const parts = label.split(" - ");
+  const title = parts[0];
+  const description = parts.length > 1 ? parts.slice(1).join(" - ") : null;
+
+  return (
+    <div className="bg-card rounded-xl p-3 sm:p-4 shadow-md border border-border min-w-[140px] flex-shrink-0 snap-start">
+      <p className={`${sizeClass} font-bold ${colorClass}`}>{value}</p>
+      <p className="text-xs sm:text-sm font-medium text-foreground/80 leading-tight">{title}</p>
+      {description && (
+        <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight mt-1 line-clamp-3">{description}</p>
+      )}
+    </div>
+  );
+};
+
 const AboutSection = () => {
   const { data: about } = useSiteAbout();
   const [showBio, setShowBio] = useState(false);
@@ -15,93 +38,65 @@ const AboutSection = () => {
   const hasFullBio = !!about?.full_bio?.trim();
   const hasTrajectory = !!about?.trajectory?.trim();
 
-  const stat1Filled = !!(about?.stat_1_value?.trim() && about?.stat_1_label?.trim());
-  const stat2Filled = !!(about?.stat_2_value?.trim() && about?.stat_2_label?.trim());
-  const stat3Filled = !!(about?.stat_3_value?.trim() && about?.stat_3_label?.trim());
-  const statsCount = [stat1Filled, stat2Filled, stat3Filled].filter(Boolean).length;
+  const stats = [
+    { filled: !!(about?.stat_1_value?.trim() && about?.stat_1_label?.trim()), value: about?.stat_1_value || "", label: about?.stat_1_label || "", color: "text-secondary" },
+    { filled: !!(about?.stat_2_value?.trim() && about?.stat_2_label?.trim()), value: about?.stat_2_value || "", label: about?.stat_2_label || "", color: "text-primary" },
+    { filled: !!(about?.stat_3_value?.trim() && about?.stat_3_label?.trim()), value: about?.stat_3_value || "", label: about?.stat_3_label || "", color: "text-accent" },
+  ].filter(s => s.filled);
 
   return (
     <section id="quem-sou" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative">
-            <div className="relative aspect-[4/5] sm:aspect-video rounded-2xl overflow-hidden bg-muted shadow-xl">
-              {hasVideo ? (
-                <div className="absolute inset-0">
+          {/* Left: Image + Stats */}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-muted shadow-xl">
+              <div className="aspect-[3/4] sm:aspect-video">
+                {hasVideo ? (
                   <video
                     src={about!.video_url!}
                     controls
                     className="w-full h-full object-cover"
                     poster={hasImage ? about!.image_url! : undefined}
                   />
-                </div>
-              ) : hasImage ? (
-                <img
-                  src={about!.image_url!}
-                  alt="Conheça minha história"
-                  className="w-full h-full object-contain sm:object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary flex items-center justify-center">
-                  <div className="text-center">
-                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center shadow-lg mb-4 mx-auto">
-                      <Play className="w-8 h-8 text-secondary-foreground ml-1" />
-                    </motion.button>
-                    <p className="text-primary-foreground font-medium">Conheça minha história</p>
+                ) : hasImage ? (
+                  <img
+                    src={about!.image_url!}
+                    alt="Conheça minha história"
+                    className="w-full h-full object-contain sm:object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/80 to-primary flex items-center justify-center">
+                    <div className="text-center">
+                      <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center shadow-lg mb-4 mx-auto">
+                        <Play className="w-8 h-8 text-secondary-foreground ml-1" />
+                      </motion.button>
+                      <p className="text-primary-foreground font-medium">Conheça minha história</p>
+                    </div>
                   </div>
-                </div>
-              )}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl" />
+                )}
+              </div>
             </div>
 
-            {statsCount > 0 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="absolute -bottom-6 left-4 right-4 sm:left-6 sm:right-6">
-                {/* Mobile: single unified card */}
-                <div className="sm:hidden bg-card rounded-xl p-4 shadow-lg border border-border space-y-3">
-                  {stat1Filled && (
-                    <div className="flex items-baseline gap-2">
-                      <p className="text-xl font-bold text-secondary">{about?.stat_1_value}</p>
-                      <p className="text-sm text-muted-foreground">{about?.stat_1_label}</p>
-                    </div>
-                  )}
-                  {stat2Filled && (
-                    <div className="flex items-baseline gap-2">
-                      <p className="text-xl font-bold text-primary">{about?.stat_2_value}</p>
-                      <p className="text-sm text-muted-foreground">{about?.stat_2_label}</p>
-                    </div>
-                  )}
-                  {stat3Filled && (
-                    <div className="flex items-baseline gap-2">
-                      <p className="text-xl font-bold text-accent">{about?.stat_3_value}</p>
-                      <p className="text-sm text-muted-foreground">{about?.stat_3_label}</p>
-                    </div>
-                  )}
+            {stats.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-3">
+                {/* Mobile: horizontal scroll */}
+                <div className="sm:hidden flex gap-2.5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none">
+                  {stats.map((s, i) => (
+                    <StatCard key={i} value={s.value} label={s.label} colorClass={s.color} sizeClass="text-xl" />
+                  ))}
                 </div>
-                {/* Desktop: separate cards */}
-                <div className="hidden sm:flex gap-3">
-                  {stat1Filled && (
-                    <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                      <p className="text-2xl font-bold text-secondary">{about?.stat_1_value}</p>
-                      <p className="text-sm text-muted-foreground leading-tight">{about?.stat_1_label}</p>
-                    </div>
-                  )}
-                  {stat2Filled && (
-                    <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                      <p className="text-2xl font-bold text-primary">{about?.stat_2_value}</p>
-                      <p className="text-sm text-muted-foreground leading-tight">{about?.stat_2_label}</p>
-                    </div>
-                  )}
-                  {stat3Filled && (
-                    <div className="flex-1 bg-card rounded-xl p-4 shadow-lg border border-border">
-                      <p className="text-2xl font-bold text-accent">{about?.stat_3_value}</p>
-                      <p className="text-sm text-muted-foreground leading-tight">{about?.stat_3_label}</p>
-                    </div>
-                  )}
+                {/* Desktop: grid */}
+                <div className="hidden sm:grid sm:grid-cols-3 gap-3">
+                  {stats.map((s, i) => (
+                    <StatCard key={i} value={s.value} label={s.label} colorClass={s.color} />
+                  ))}
                 </div>
               </motion.div>
             )}
           </motion.div>
 
+          {/* Right: Text */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:pl-8">
             <span className="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-semibold tracking-wider mb-6">QUEM SOU</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Juliana Maciel Hoppe</h2>
