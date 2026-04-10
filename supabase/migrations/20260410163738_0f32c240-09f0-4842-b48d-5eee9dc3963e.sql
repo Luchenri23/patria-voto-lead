@@ -1,0 +1,1 @@
+ALTER TABLE public.site_footer ADD COLUMN IF NOT EXISTS gestao_text text NOT NULL DEFAULT 'Gestão 2025-2028 • Canoinhas/SC';
