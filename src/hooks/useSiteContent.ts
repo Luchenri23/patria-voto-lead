@@ -17,6 +17,25 @@ function useSingleRow<T>(table: string) {
       if (error) throw error;
       return data as T | null;
     },
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+  });
+}
+
+// Generic fetch for multi-row tables
+function useMultiRow<T>(table: string, orderBy = "created_at", ascending = false) {
+  return useQuery({
+    queryKey: [table],
+    queryFn: async () => {
+      const { data, error } = await db
+        .from(table)
+        .select("*")
+        .order(orderBy, { ascending });
+      if (error) throw error;
+      return (data as T[]) || [];
+    },
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 }
 
