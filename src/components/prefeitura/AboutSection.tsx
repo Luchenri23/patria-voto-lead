@@ -68,13 +68,13 @@ const AboutSection = () => {
   ].filter(s => s.filled);
 
   return (
-    <section id="quem-sou" className="py-10 sm:py-20 bg-background">
+    <section id="quem-sou" className="py-4 sm:py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-center">
           {/* Left: Image + Stats */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex flex-col">
             <div className="rounded-2xl overflow-hidden bg-muted shadow-xl">
-              <div className="aspect-[3/4] sm:aspect-video">
+              <div className="sm:aspect-video">
                 {hasVideo ? (
                   <video
                     src={about!.video_url!}
