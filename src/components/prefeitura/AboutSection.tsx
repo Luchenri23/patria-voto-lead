@@ -103,10 +103,20 @@ const AboutSection = () => {
 
             {stats.length > 0 && (
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-3">
-                {/* Mobile: horizontal scroll */}
-                <div className="sm:hidden flex gap-2.5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none">
+                {/* Mobile: stacked vertically in a single card */}
+                <div className="sm:hidden bg-card rounded-xl p-4 shadow-md border border-border space-y-3">
                   {stats.map((s, i) => (
-                    <StatCard key={i} value={s.value} subtitle={s.subtitle} lines={s.lines} colorClass={s.color} sizeClass="text-xl" />
+                    <div key={i} className={i > 0 ? "border-t border-border pt-3" : ""}>
+                      <p className={`text-xl font-bold ${s.color} leading-tight inline`}>{s.value}</p>
+                      {s.subtitle && <span className="text-xs font-semibold text-foreground/90 ml-1.5">{s.subtitle}</span>}
+                      {s.lines.filter(l => l.trim()).length > 0 && (
+                        <div className="mt-0.5">
+                          {s.lines.filter(l => l.trim()).map((line, j) => (
+                            <p key={j} className="text-[11px] text-muted-foreground leading-tight">{line}</p>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
                 {/* Desktop: grid */}
