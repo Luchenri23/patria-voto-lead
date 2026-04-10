@@ -102,7 +102,7 @@ const AboutSection = () => {
             </div>
 
             {stats.length > 0 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-3">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-2 sm:mt-3">
                 {/* Mobile: stacked vertically in a single card */}
                 <div className="sm:hidden bg-card rounded-xl p-4 shadow-md border border-border space-y-3">
                   {stats.map((s, i) => (
