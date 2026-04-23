@@ -167,6 +167,10 @@ export interface SiteContact {
   email: string;
   working_hours: string;
   map_embed_url: string | null;
+  whatsapp_channel_title: string;
+  whatsapp_channel_subtitle: string;
+  whatsapp_channel_button_text: string;
+  whatsapp_channel_url: string | null;
   updated_at: string;
 }
 
