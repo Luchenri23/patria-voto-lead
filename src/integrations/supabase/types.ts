@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_messages: {
+        Row: {
+          cidade: string
+          created_at: string
+          data_nascimento: string
+          id: string
+          nome: string
+          whatsapp: string
+        }
+        Insert: {
+          cidade: string
+          created_at?: string
+          data_nascimento: string
+          id?: string
+          nome: string
+          whatsapp: string
+        }
+        Update: {
+          cidade?: string
+          created_at?: string
+          data_nascimento?: string
+          id?: string
+          nome?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
@@ -163,6 +190,10 @@ export type Database = {
           map_embed_url: string | null
           phone: string
           updated_at: string
+          whatsapp_channel_button_text: string
+          whatsapp_channel_subtitle: string
+          whatsapp_channel_title: string
+          whatsapp_channel_url: string | null
           working_hours: string
         }
         Insert: {
@@ -172,6 +203,10 @@ export type Database = {
           map_embed_url?: string | null
           phone?: string
           updated_at?: string
+          whatsapp_channel_button_text?: string
+          whatsapp_channel_subtitle?: string
+          whatsapp_channel_title?: string
+          whatsapp_channel_url?: string | null
           working_hours?: string
         }
         Update: {
@@ -181,6 +216,10 @@ export type Database = {
           map_embed_url?: string | null
           phone?: string
           updated_at?: string
+          whatsapp_channel_button_text?: string
+          whatsapp_channel_subtitle?: string
+          whatsapp_channel_title?: string
+          whatsapp_channel_url?: string | null
           working_hours?: string
         }
         Relationships: []
