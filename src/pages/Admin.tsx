@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, Home, Layout, User, Briefcase, Newspaper, FileText, Share2, Phone, Settings, Eye, Link2, Globe, Mail } from "lucide-react";
+import { LogOut, Home, Layout, User, Briefcase, Newspaper, FileText, Share2, Phone, Settings, Eye, Link2, Globe, Mail, MessageSquare } from "lucide-react";
 import AdminHero from "@/components/admin/AdminHero";
 import AdminAbout from "@/components/admin/AdminAbout";
 import AdminProjects from "@/components/admin/AdminProjects";
@@ -17,6 +17,7 @@ import AdminSections from "@/components/admin/AdminSections";
 import AdminFooterLinks from "@/components/admin/AdminFooterLinks";
 import AdminSocialLinks from "@/components/admin/AdminSocialLinks";
 import AdminNewsletter from "@/components/admin/AdminNewsletter";
+import AdminContactMessages from "@/components/admin/AdminContactMessages";
 
 const Admin = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
@@ -71,6 +72,7 @@ const Admin = () => {
             <TabsTrigger value="footer" className="flex items-center gap-1"><Settings className="w-4 h-4" /> Rodapé</TabsTrigger>
             <TabsTrigger value="footer-links" className="flex items-center gap-1"><Link2 className="w-4 h-4" /> Links Rodapé</TabsTrigger>
             <TabsTrigger value="newsletter" className="flex items-center gap-1"><Mail className="w-4 h-4" /> Newsletter</TabsTrigger>
+            <TabsTrigger value="messages" className="flex items-center gap-1"><MessageSquare className="w-4 h-4" /> Mensagens</TabsTrigger>
           </TabsList>
 
           <TabsContent value="sections"><AdminSections /></TabsContent>
@@ -86,6 +88,7 @@ const Admin = () => {
           <TabsContent value="footer"><AdminFooter /></TabsContent>
           <TabsContent value="footer-links"><AdminFooterLinks /></TabsContent>
           <TabsContent value="newsletter"><AdminNewsletter /></TabsContent>
+          <TabsContent value="messages"><AdminContactMessages /></TabsContent>
         </Tabs>
       </div>
     </div>

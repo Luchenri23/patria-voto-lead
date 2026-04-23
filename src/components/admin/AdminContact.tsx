@@ -4,9 +4,13 @@ import AdminSingleForm from "./AdminSingleForm";
 const fields = [
   { name: "address", label: "Endereço", type: "textarea" as const },
   { name: "phone", label: "Telefone", placeholder: "(47) 3621-7705" },
-  { name: "email", label: "E-mail", placeholder: "gabinete@canoinhas.sc.gov.br" },
+  { name: "email", label: "E-mail (interno)", placeholder: "gabinete@canoinhas.sc.gov.br" },
   { name: "working_hours", label: "Horário de Funcionamento", placeholder: "Segunda a Sexta: 8h às 17h" },
   { name: "map_embed_url", label: "URL do Mapa (embed)", type: "url" as const },
+  { name: "whatsapp_channel_title", label: "Canal WhatsApp - Título", placeholder: "Entre em meu canal no WhatsApp" },
+  { name: "whatsapp_channel_subtitle", label: "Canal WhatsApp - Subtítulo", placeholder: "e fique por dentro de todas as novidades!" },
+  { name: "whatsapp_channel_button_text", label: "Canal WhatsApp - Texto do botão", placeholder: "Entrar no canal" },
+  { name: "whatsapp_channel_url", label: "Canal WhatsApp - Link personalizado", type: "url" as const, placeholder: "https://chat.whatsapp.com/..." },
 ];
 
 const AdminContact = () => {

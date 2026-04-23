@@ -30,8 +30,8 @@ const SocialWall = () => {
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold tracking-wider mb-4">REDES SOCIAIS</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Acompanhe nas Redes</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">Siga a Prefeita Juliana Maciel nas redes sociais e fique por dentro de tudo que acontece!</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Me acompanhe nas Redes</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">Me siga nas redes sociais e fique por dentro de tudo que acontece!</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="flex flex-wrap justify-center gap-6 mb-12">

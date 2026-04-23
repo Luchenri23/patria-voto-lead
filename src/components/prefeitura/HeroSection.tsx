@@ -93,9 +93,11 @@ const HeroSection = () => {
               {hero?.title || "Trabalhando por uma Canoinhas melhor para todos"}
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="text-lg text-primary-foreground/80 mb-8 leading-relaxed max-w-xl">
-              {hero?.subtitle || "Transparência, compromisso e resultados."}
-            </motion.p>
+            {hero?.subtitle?.trim() && (
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="text-lg text-primary-foreground/80 mb-8 leading-relaxed max-w-xl">
+                {hero.subtitle}
+              </motion.p>
+            )}
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4">
               {hero?.cta_text?.trim() && (
