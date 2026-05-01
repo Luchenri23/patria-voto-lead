@@ -27,14 +27,20 @@ interface AdminSingleFormProps {
 }
 
 const AdminSingleForm = ({ title, fields, data, isLoading, onSave }: AdminSingleFormProps) => {
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [formData, setFormData] = useState<Record<string, string | boolean>>({});
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     if (data) {
-      const initial: Record<string, string> = {};
-      fields.forEach(f => { initial[f.name] = String(data[f.name] ?? ""); });
+      const initial: Record<string, string | boolean> = {};
+      fields.forEach(f => {
+        if (f.type === "boolean") {
+          initial[f.name] = Boolean(data[f.name]);
+        } else {
+          initial[f.name] = String(data[f.name] ?? "");
+        }
+      });
       setFormData(initial);
     }
   }, [data, fields]);
@@ -62,17 +68,28 @@ const AdminSingleForm = ({ title, fields, data, isLoading, onSave }: AdminSingle
             {field.type === "image" ? (
               <ImageUploadField
                 label={field.label}
-                value={formData[field.name] || ""}
+                value={(formData[field.name] as string) || ""}
                 onChange={(url) => setFormData(prev => ({ ...prev, [field.name]: url }))}
                 accept={field.accept}
                 hint={field.hint}
                 maxSizeKB={field.maxSizeKB}
               />
+            ) : field.type === "boolean" ? (
+              <div className="flex items-center justify-between rounded-lg border border-border p-3">
+                <div>
+                  <Label className="cursor-pointer">{field.label}</Label>
+                  {field.hint && <p className="text-xs text-muted-foreground mt-1">{field.hint}</p>}
+                </div>
+                <Switch
+                  checked={Boolean(formData[field.name])}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, [field.name]: checked }))}
+                />
+              </div>
             ) : field.type === "textarea" ? (
               <>
                 <Label>{field.label}</Label>
                 <Textarea
-                  value={formData[field.name] || ""}
+                  value={(formData[field.name] as string) || ""}
                   onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
                   placeholder={field.placeholder}
                   rows={4}
@@ -83,7 +100,7 @@ const AdminSingleForm = ({ title, fields, data, isLoading, onSave }: AdminSingle
                 <Label>{field.label}</Label>
                 <Input
                   type={field.type === "url" ? "url" : "text"}
-                  value={formData[field.name] || ""}
+                  value={(formData[field.name] as string) || ""}
                   onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
                   placeholder={field.placeholder}
                 />
