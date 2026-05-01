@@ -10,6 +10,7 @@ const fields = [
   { name: "agenda_url", label: "URL da Agenda da Prefeita", type: "url" as const, placeholder: "https://exemplo.com/agenda" },
   { name: "image_url", label: "Imagem de Fundo", type: "image" as const, accept: "image/*", hint: "1920×1080px (paisagem)", maxSizeKB: 2048 },
   { name: "badge_text", label: "Badge Superior (ex: Gestão 2025-2028)", placeholder: "Gestão 2025-2028 • Canoinhas/SC" },
+  { name: "show_card", label: "Exibir card do avatar (lateral direita)", type: "boolean" as const, hint: "Quando desativado, o card com foto/emoji e estatísticas fica oculto." },
   { name: "card_name", label: "Nome no Card", placeholder: "Juliana Maciel" },
   { name: "card_subtitle", label: "Subtítulo do Card", placeholder: "Prefeita de Canoinhas" },
   { name: "card_stat1_value", label: "Card Stat 1 - Valor (vazio para ocultar)", placeholder: "2º" },

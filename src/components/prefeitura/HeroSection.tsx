@@ -124,6 +124,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
+          {hero?.show_card && (
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.7 }} className="relative hidden lg:block">
             <div className="relative">
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-8 border border-primary-foreground/20">
@@ -167,6 +168,7 @@ const HeroSection = () => {
               )}
             </div>
           </motion.div>
+          )}
         </div>
       </div>
 

@@ -62,6 +62,7 @@ export interface SiteHero {
   fallback_color: string | null;
   card_image_url: string | null;
   agenda_url: string | null;
+  show_card: boolean;
   updated_at: string;
 }
 

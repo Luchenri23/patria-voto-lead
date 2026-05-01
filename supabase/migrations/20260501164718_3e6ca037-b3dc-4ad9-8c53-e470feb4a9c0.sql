@@ -1,0 +1,1 @@
+ALTER TABLE public.site_hero ADD COLUMN IF NOT EXISTS show_card boolean NOT NULL DEFAULT false;
