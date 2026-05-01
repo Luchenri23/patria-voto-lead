@@ -345,6 +345,7 @@ export type Database = {
           fallback_color: string | null
           id: string
           image_url: string | null
+          show_card: boolean
           subtitle: string
           title: string
           updated_at: string
@@ -368,6 +369,7 @@ export type Database = {
           fallback_color?: string | null
           id?: string
           image_url?: string | null
+          show_card?: boolean
           subtitle?: string
           title?: string
           updated_at?: string
@@ -391,6 +393,7 @@ export type Database = {
           fallback_color?: string | null
           id?: string
           image_url?: string | null
+          show_card?: boolean
           subtitle?: string
           title?: string
           updated_at?: string
