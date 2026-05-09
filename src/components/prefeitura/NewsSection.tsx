@@ -5,6 +5,7 @@ import { useSiteNews } from "@/hooks/useSiteContent";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Link } from "react-router-dom";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const NewsSection = () => {
   const { data: news } = useSiteNews();

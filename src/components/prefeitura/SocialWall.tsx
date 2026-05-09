@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { useSiteSocial, useSiteSocialLinks } from "@/hooks/useSiteContent";
 import SocialIcon from "@/components/prefeitura/SocialIcon";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const SocialWall = () => {
   const { data: posts } = useSiteSocial();
