@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Volume2, VolumeX } from "lucide-react";
 import { useSiteHero } from "@/hooks/useSiteContent";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const HeroSection = () => {
   const { data: hero } = useSiteHero();
@@ -35,9 +36,12 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-hero" />
         {hasImage && (
           <img
-            src={hero.image_url!}
+            src={optimizeImage(hero!.image_url, { width: 1600, quality: 65 })}
             alt=""
             loading="eager"
+            decoding="async"
+            // @ts-expect-error fetchpriority is a valid HTML attribute
+            fetchpriority="high"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               hasVideo && videoLoaded ? "opacity-0" : "opacity-20"
             }`}

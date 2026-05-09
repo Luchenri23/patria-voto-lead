@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { useSiteProjects } from "@/hooks/useSiteContent";
 import { Link } from "react-router-dom";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const WorkSection = () => {
   const { data: projects } = useSiteProjects();
@@ -41,7 +42,7 @@ const WorkSection = () => {
                     <article className="bg-card rounded-2xl overflow-hidden shadow-lg hover-lift border border-border group">
                       <div className="relative h-64 md:h-80 overflow-hidden">
                         {featured.image_url && (
-                          <img loading="lazy" decoding="async" src={featured.image_url} alt={featured.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                          <img loading="lazy" decoding="async" src={optimizeImage(featured.image_url, { width: 1000, quality: 70 })} alt={featured.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                         )}
                         {featured.video_url && (
                           <div className="absolute inset-0 flex items-center justify-center bg-primary/30">
@@ -70,7 +71,7 @@ const WorkSection = () => {
                   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.4 }} className="bg-card rounded-xl overflow-hidden shadow-card hover-lift border border-border group flex">
                     <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden">
                       {project.image_url && (
-                        <img loading="lazy" decoding="async" src={project.image_url} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <img loading="lazy" decoding="async" src={optimizeImage(project.image_url, { width: 600, quality: 70 })} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                       )}
                     </div>
                     <div className="p-4 flex-1 min-w-0">
