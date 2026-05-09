@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { useSiteProjects } from "@/hooks/useSiteContent";
 import { Link } from "react-router-dom";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const WorkSection = () => {
   const { data: projects } = useSiteProjects();
