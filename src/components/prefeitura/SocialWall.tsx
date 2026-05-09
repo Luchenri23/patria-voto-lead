@@ -87,7 +87,7 @@ const SocialPost = ({ post, index, aspectClass }: SocialPostProps) => (
   <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.4 }}>
     <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="relative rounded-xl overflow-hidden group cursor-pointer block">
       {post.image_url && (
-        <img src={post.image_url} alt={post.caption || `Post ${index + 1}`} className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${aspectClass}`} />
+        <img loading="lazy" decoding="async" src={post.image_url} alt={post.caption || `Post ${index + 1}`} className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${aspectClass}`} />
       )}
       <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
         {post.post_type === "video" && (
