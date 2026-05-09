@@ -42,7 +42,7 @@ const NewsSection = () => {
                 <Wrapper className="block">
                   <article className="bg-card rounded-2xl overflow-hidden shadow-lg hover-lift border border-border group">
                     <div className="relative h-64 md:h-96 overflow-hidden">
-                      {featuredNews.image_url && <img loading="lazy" decoding="async" src={featuredNews.image_url} alt={featuredNews.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+                      {featuredNews.image_url && <img loading="lazy" decoding="async" src={optimizeImage(featuredNews.image_url, { width: 1000, quality: 70 })} alt={featuredNews.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
                       {featuredNews.video_url && (
                         <div className="absolute inset-0 flex items-center justify-center bg-primary/30">
                           <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg"><Play className="w-7 h-7 text-secondary-foreground ml-1" /></div>
