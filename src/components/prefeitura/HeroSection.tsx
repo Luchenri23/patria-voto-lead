@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Volume2, VolumeX } from "lucide-react";
 import { useSiteHero } from "@/hooks/useSiteContent";
+import { optimizeImage } from "@/lib/imageOptimize";
 
 const HeroSection = () => {
   const { data: hero } = useSiteHero();
