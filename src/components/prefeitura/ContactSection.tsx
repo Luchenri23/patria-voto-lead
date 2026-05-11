@@ -107,13 +107,47 @@ const ContactSection = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="cidade" className="font-semibold">Cidade (Santa Catarina) *</Label>
-                  <Select value={cidade} onValueChange={setCidade} required>
-                    <SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione sua cidade" /></SelectTrigger>
-                    <SelectContent className="bg-background border border-border z-50 max-h-72">
-                      {CIDADES_SC.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
+                  <Label className="font-semibold">Cidade (Santa Catarina) *</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          "w-full justify-between h-12 bg-background font-normal",
+                          !cidade && "text-muted-foreground"
+                        )}
+                      >
+                        {cidade || "Selecione sua cidade"}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0" align="start">
+                      <Command>
+                        <CommandInput placeholder="Buscar cidade..." />
+                        <CommandList>
+                          <CommandEmpty>Nenhuma cidade encontrada.</CommandEmpty>
+                          <CommandGroup>
+                            {CIDADES_SC.map((c) => (
+                              <CommandItem
+                                key={c}
+                                value={c}
+                                onSelect={() => setCidade(c === cidade ? "" : c)}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    cidade === c ? "opacity-100" : "opacity-0"
+                                  )}
+                                />
+                                {c}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="data_nascimento" className="font-semibold">Data de Nascimento *</Label>
