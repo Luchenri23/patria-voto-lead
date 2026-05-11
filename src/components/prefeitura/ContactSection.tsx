@@ -24,16 +24,7 @@ const formatPhone = (value: string) => {
   return v;
 };
 
-// Cidades de Santa Catarina (lista principal)
-const CIDADES_SC = [
-  "Florianópolis", "Joinville", "Blumenau", "São José", "Chapecó", "Itajaí",
-  "Criciúma", "Jaraguá do Sul", "Lages", "Palhoça", "Balneário Camboriú",
-  "Brusque", "Tubarão", "São Bento do Sul", "Caçador", "Canoinhas",
-  "Concórdia", "Camboriú", "Navegantes", "Rio do Sul", "Mafra", "Indaial",
-  "Araranguá", "Içara", "Gaspar", "Biguaçu", "Itapema", "Videira",
-  "Curitibanos", "São Francisco do Sul", "Laguna", "Imbituba", "Joaçaba",
-  "Xanxerê", "Três Barras", "Porto União", "Outra cidade",
-];
+import { CIDADES_SC } from "@/lib/cidadesSC";
 
 const ContactSection = () => {
   const { toast } = useToast();
