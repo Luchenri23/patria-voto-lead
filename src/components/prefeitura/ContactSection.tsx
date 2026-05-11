@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Phone, MessageCircle } from "lucide-react";
+import { Send, Phone, MessageCircle, Check, ChevronsUpDown } from "lucide-react";
 import { useSiteContact } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const db = supabase as any;
@@ -22,16 +24,7 @@ const formatPhone = (value: string) => {
   return v;
 };
 
-// Cidades de Santa Catarina (lista principal)
-const CIDADES_SC = [
-  "Florianópolis", "Joinville", "Blumenau", "São José", "Chapecó", "Itajaí",
-  "Criciúma", "Jaraguá do Sul", "Lages", "Palhoça", "Balneário Camboriú",
-  "Brusque", "Tubarão", "São Bento do Sul", "Caçador", "Canoinhas",
-  "Concórdia", "Camboriú", "Navegantes", "Rio do Sul", "Mafra", "Indaial",
-  "Araranguá", "Içara", "Gaspar", "Biguaçu", "Itapema", "Videira",
-  "Curitibanos", "São Francisco do Sul", "Laguna", "Imbituba", "Joaçaba",
-  "Xanxerê", "Três Barras", "Porto União", "Outra cidade",
-];
+import { CIDADES_SC } from "@/lib/cidadesSC";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -114,13 +107,47 @@ const ContactSection = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="cidade" className="font-semibold">Cidade (Santa Catarina) *</Label>
-                  <Select value={cidade} onValueChange={setCidade} required>
-                    <SelectTrigger className="h-12 bg-background"><SelectValue placeholder="Selecione sua cidade" /></SelectTrigger>
-                    <SelectContent className="bg-background border border-border z-50 max-h-72">
-                      {CIDADES_SC.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
+                  <Label className="font-semibold">Cidade (Santa Catarina) *</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          "w-full justify-between h-12 bg-background font-normal",
+                          !cidade && "text-muted-foreground"
+                        )}
+                      >
+                        {cidade || "Selecione sua cidade"}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0" align="start">
+                      <Command>
+                        <CommandInput placeholder="Buscar cidade..." />
+                        <CommandList>
+                          <CommandEmpty>Nenhuma cidade encontrada.</CommandEmpty>
+                          <CommandGroup>
+                            {CIDADES_SC.map((c) => (
+                              <CommandItem
+                                key={c}
+                                value={c}
+                                onSelect={() => setCidade(c === cidade ? "" : c)}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    cidade === c ? "opacity-100" : "opacity-0"
+                                  )}
+                                />
+                                {c}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="data_nascimento" className="font-semibold">Data de Nascimento *</Label>
