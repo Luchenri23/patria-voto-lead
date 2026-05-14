@@ -61,9 +61,11 @@ const Header = () => {
                 </a>
               ))}
             </div>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
-              <a href={header?.cta_link || "#contato"}>{header?.cta_text || "Fale Conosco"}</a>
-            </Button>
+            {header?.cta_text?.trim() && (
+              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
+                <a href={header?.cta_link || "#contato"}>{header.cta_text}</a>
+              </Button>
+            )}
           </div>
 
           <button className={`lg:hidden p-2 ${isScrolled ? "text-primary" : "text-primary-foreground"}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Menu">
