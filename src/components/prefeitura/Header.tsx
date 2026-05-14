@@ -88,9 +88,11 @@ const Header = () => {
                   </a>
                 ))}
               </div>
-              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full mt-2" asChild>
-                <a href={header?.cta_link || "#contato"}>{header?.cta_text || "Fale Conosco"}</a>
-              </Button>
+              {header?.cta_text?.trim() && (
+                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full mt-2" asChild>
+                  <a href={header?.cta_link || "#contato"}>{header.cta_text}</a>
+                </Button>
+              )}
             </div>
           </nav>
         )}
