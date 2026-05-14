@@ -144,8 +144,8 @@ const HeroSection = () => {
                       <span className="text-6xl">👩‍💼</span>
                     )}
                   </div>
-                   <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero?.card_name || "Juliana Maciel"}</h3>
-                  <p className="text-secondary font-semibold mb-4">{hero?.card_subtitle || "Prefeita de Canoinhas"}</p>
+                   {hero?.card_name?.trim() && <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero.card_name}</h3>}
+                  {hero?.card_subtitle?.trim() && <p className="text-secondary font-semibold mb-4">{hero.card_subtitle}</p>}
                   {hasStats && (
                     <div className={`grid gap-4 text-primary-foreground/80 text-sm ${hasStat1 && hasStat2 ? "grid-cols-2" : "grid-cols-1"}`}>
                       {hasStat1 && (
