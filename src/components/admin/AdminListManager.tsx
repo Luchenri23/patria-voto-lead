@@ -155,7 +155,11 @@ const AdminListManager = ({ title, fields, data, isLoading, onAdd, onUpdate, onD
                       <Input
                         type="date"
                         value={String(formData[field.name] || "").slice(0, 10)}
-                        onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        onChange={e => {
+                          const v = e.target.value;
+                          // Save as UTC noon to avoid timezone day-shift on display
+                          setFormData(prev => ({ ...prev, [field.name]: v ? `${v}T12:00:00.000Z` : "" }));
+                        }}
                       />
                     ) : field.type === "checkbox" ? (
                       <label className="flex items-center gap-2">

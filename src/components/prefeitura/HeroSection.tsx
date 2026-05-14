@@ -86,16 +86,20 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="mb-6">
-               <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium border border-secondary/30">
-                <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-                {hero?.badge_text || "Gestão 2025-2028 • Canoinhas/SC"}
-              </span>
-            </motion.div>
+            {hero?.badge_text?.trim() && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="mb-6">
+                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium border border-secondary/30">
+                  <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
+                  {hero.badge_text}
+                </span>
+              </motion.div>
+            )}
 
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
-              {hero?.title || "Trabalhando por uma Canoinhas melhor para todos"}
-            </motion.h1>
+            {hero?.title?.trim() && (
+              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+                {hero.title}
+              </motion.h1>
+            )}
 
             {hero?.subtitle?.trim() && (
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="text-lg text-primary-foreground/80 mb-8 leading-relaxed max-w-xl">
@@ -140,8 +144,8 @@ const HeroSection = () => {
                       <span className="text-6xl">👩‍💼</span>
                     )}
                   </div>
-                   <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero?.card_name || "Juliana Maciel"}</h3>
-                  <p className="text-secondary font-semibold mb-4">{hero?.card_subtitle || "Prefeita de Canoinhas"}</p>
+                   {hero?.card_name?.trim() && <h3 className="text-2xl font-bold text-primary-foreground mb-2">{hero.card_name}</h3>}
+                  {hero?.card_subtitle?.trim() && <p className="text-secondary font-semibold mb-4">{hero.card_subtitle}</p>}
                   {hasStats && (
                     <div className={`grid gap-4 text-primary-foreground/80 text-sm ${hasStat1 && hasStat2 ? "grid-cols-2" : "grid-cols-1"}`}>
                       {hasStat1 && (

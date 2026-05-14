@@ -33,16 +33,16 @@ const Header = () => {
           <a href="#" className="flex items-center gap-2">
             {header?.logo_url ? (
               <img src={header.logo_url} alt={header?.logo_text || "Logo"} className="h-10 md:h-12 w-auto transition-all" />
-            ) : (
+            ) : header ? (
               <div className="flex flex-col">
                 <span className={`text-lg md:text-xl font-bold transition-colors ${isScrolled ? "text-primary" : "text-primary-foreground"}`}>
-                  {header?.logo_text || "Juliana Maciel"}
+                  {header.logo_text}
                 </span>
                 <span className={`text-xs font-medium tracking-wider transition-colors ${isScrolled ? "text-secondary" : "text-secondary"}`}>
-                  {header?.logo_subtitle?.toUpperCase() || "PREFEITA DE CANOINHAS"}
+                  {header.logo_subtitle?.toUpperCase()}
                 </span>
               </div>
-            )}
+            ) : null}
           </a>
 
           <nav className="hidden lg:flex items-center gap-6">
@@ -61,9 +61,11 @@ const Header = () => {
                 </a>
               ))}
             </div>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
-              <a href={header?.cta_link || "#contato"}>{header?.cta_text || "Fale Conosco"}</a>
-            </Button>
+            {header?.cta_text?.trim() && (
+              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
+                <a href={header?.cta_link || "#contato"}>{header.cta_text}</a>
+              </Button>
+            )}
           </div>
 
           <button className={`lg:hidden p-2 ${isScrolled ? "text-primary" : "text-primary-foreground"}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Menu">
@@ -86,9 +88,11 @@ const Header = () => {
                   </a>
                 ))}
               </div>
-              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full mt-2" asChild>
-                <a href={header?.cta_link || "#contato"}>{header?.cta_text || "Fale Conosco"}</a>
-              </Button>
+              {header?.cta_text?.trim() && (
+                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full mt-2" asChild>
+                  <a href={header?.cta_link || "#contato"}>{header.cta_text}</a>
+                </Button>
+              )}
             </div>
           </nav>
         )}

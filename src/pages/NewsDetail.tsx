@@ -25,8 +25,11 @@ const NewsDetail = () => {
   });
 
   const formatDate = (date: string) => {
-    try { return format(new Date(date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR }); }
-    catch { return date; }
+    try {
+      const datePart = date.slice(0, 10);
+      const d = new Date(`${datePart}T12:00:00Z`);
+      return format(d, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
+    } catch { return date; }
   };
 
   if (isLoading) {

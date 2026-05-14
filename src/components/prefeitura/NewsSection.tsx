@@ -14,8 +14,12 @@ const NewsSection = () => {
   const recentNews = news?.filter(n => n.id !== featuredNews?.id).slice(0, 5) || [];
 
   const formatDate = (date: string) => {
-    try { return format(new Date(date), "dd MMM yyyy", { locale: ptBR }); }
-    catch { return date; }
+    try {
+      // Use only the YYYY-MM-DD part as UTC to avoid timezone day-shift
+      const datePart = date.slice(0, 10);
+      const d = new Date(`${datePart}T12:00:00Z`);
+      return format(d, "dd MMM yyyy", { locale: ptBR });
+    } catch { return date; }
   };
 
   const getNewsLink = (item: { id: string; external_url: string | null; content: string | null }) => {
