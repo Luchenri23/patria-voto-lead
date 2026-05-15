@@ -53,8 +53,12 @@ const AdminContactMessages = () => {
   };
 
   const fmtDate = (d: string) => {
-    try { return format(new Date(d), "dd/MM/yyyy", { locale: ptBR }); }
-    catch { return d; }
+    try {
+      // For YYYY-MM-DD (date column), parse as UTC noon to avoid timezone day-shift
+      const iso = d?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      const dt = iso ? new Date(`${d}T12:00:00Z`) : new Date(d);
+      return format(dt, "dd/MM/yyyy", { locale: ptBR });
+    } catch { return d; }
   };
 
   const handleExport = () => {
