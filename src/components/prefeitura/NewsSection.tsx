@@ -32,8 +32,7 @@ const NewsSection = () => {
     <section id="noticias" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <span className="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-semibold tracking-wider mb-4">FIQUE INFORMADO</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Notícias</h2>
+          <span className="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-semibold tracking-wider mb-4">NOTÍCIAS</span>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
