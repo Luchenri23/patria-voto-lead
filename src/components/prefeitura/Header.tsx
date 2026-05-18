@@ -20,7 +20,7 @@ const Header = () => {
 
   const navItems = [
     { label: "Quem Sou", href: "#quem-sou" },
-    { label: "Projetos", href: "#trabalho" },
+    { label: "Meu Trabalho", href: "#trabalho" },
     { label: "Notícias", href: "#noticias" },
     { label: "Redes Sociais", href: "#redes-sociais" },
     { label: "Contato", href: "#contato" },
