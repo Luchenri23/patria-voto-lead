@@ -90,9 +90,6 @@ const SocialPost = ({ post, index, aspectClass }: SocialPostProps) => (
         <img loading="lazy" decoding="async" src={optimizeImage(post.image_url, { width: 600, quality: 70 })} alt={post.caption || `Post ${index + 1}`} className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${aspectClass}`} />
       )}
       <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        {post.post_type === "video" && (
-          <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center"><Play className="w-5 h-5 text-secondary-foreground ml-0.5" /></div>
-        )}
         {post.caption && <p className="absolute bottom-3 left-3 right-3 text-primary-foreground text-xs font-medium line-clamp-2">{post.caption}</p>}
       </div>
       <div className="absolute top-3 left-3">
